@@ -1,0 +1,1017 @@
+<app-premium-modal
+  [isOpen]="showWelcomeModal"
+  (closeModal)="closeWelcomeModal()"
+>
+</app-premium-modal>
+
+<!-- STATS -->
+
+<!-- STATS -->
+
+<section class="stats-grid">
+
+  <!-- STOCK SEARCH -->
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Search">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        SEARCH INVENTORY
+      </small>
+
+      <h2>
+        Stock Search
+      </h2>
+
+      <a href="#">
+        Explore &rarr;
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- EARLY BIRD -->
+
+  <div
+    class="stat-card earlybird-card"
+  >
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Gavel">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        LIVE BIDDING
+      </small>
+
+      <h2>
+        Early Bird
+      </h2>
+
+     <a
+  href=""
+  (click)="toggleEarlyBirdMenu(); $event.preventDefault()"
+>
+  Open Menu &rarr;
+</a>
+
+    </div>
+
+    <!-- DROPDOWN -->
+
+    <div
+      class="earlybird-dropdown"
+      *ngIf="showEarlyBirdMenu"
+    >
+
+      <button>
+        Search
+      </button>
+
+      <button>
+        Bid Short List
+      </button>
+
+      <button>
+        My Bid
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- NEW ARRIVALS -->
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Gem">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        LATEST INVENTORY
+      </small>
+
+      <h2>
+        New Arrivals
+      </h2>
+
+      <a href="#">
+        View Collection &rarr;
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- RECOMMENDED -->
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="HandCoins">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        CURATED PICKS
+      </small>
+
+      <h2>
+        Recommended
+      </h2>
+
+      <a href="#">
+        Discover &rarr;
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- UPCOMING -->
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Sparkles">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        UPCOMING STOCK
+      </small>
+
+      <h2>
+        Upcoming
+      </h2>
+
+      <a href="#">
+        Preview &rarr;
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- PARCEL -->
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Package">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
+
+      <small>
+        DELIVERY STATUS
+      </small>
+
+      <h2>
+        Parcel
+      </h2>
+
+      <a href="#">
+        Track &rarr;
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- DUMMY -->
+
+  <div class="stat-card muted-card">
+
+    <div class="stat-content muted">
+
+      <small>
+        COMING SOON
+      </small>
+
+      <h2>
+        Market Insights
+      </h2>
+
+    </div>
+
+  </div>
+
+  <!-- DUMMY -->
+
+  <div class="stat-card muted-card">
+
+    <div class="stat-content muted">
+
+      <small>
+        COMING SOON
+      </small>
+
+      <h2>
+        Smart Match
+      </h2>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- DASHBOARD GRID -->
+
+<section class="dashboard-grid">
+
+  <!-- ANALYTICS -->
+
+  <div class="panel analytics-panel">
+
+    <div class="panel-header">
+
+      <div>
+
+        <small>
+          MONTHLY PERFORMANCE
+        </small>
+
+        <h3>
+          Diamond Orders Overview
+        </h3>
+
+      </div>
+
+     <div class="chart-filters">
+
+  <button
+    class="filter-btn active"
+  >
+    7D
+  </button>
+
+  <button
+    class="filter-btn"
+  >
+    1M
+  </button>
+
+  <button
+    class="filter-btn"
+  >
+    6M
+  </button>
+
+  <button
+    class="filter-btn"
+  >
+    1Y
+  </button>
+
+  <button
+    class="filter-btn"
+  >
+    Custom
+  </button>
+
+</div>
+
+    </div>
+
+    <div class="chart-wrapper">
+
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [stroke]="chartOptions.stroke"
+    [tooltip]="chartOptions.tooltip"
+    [dataLabels]="chartOptions.dataLabels"
+    [grid]="chartOptions.grid">
+  </apx-chart>
+
+</div>
+
+  </div>
+
+  <!-- PIE -->
+
+  <div class="panel pie-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Diamond Shape Mix
+      </h3>
+
+    </div>
+
+    <apx-chart
+      [series]="pieChartOptions.series"
+      [chart]="pieChartOptions.chart"
+      [labels]="pieChartOptions.labels"
+      [responsive]="pieChartOptions.responsive"
+      [legend]="pieChartOptions.legend"
+    >
+    </apx-chart>
+
+  </div>
+
+    <!-- RECENT ORDERS -->
+
+  <div class="panel orders-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Recent Orders
+      </h3>
+
+      <a href="#">
+        View all
+      </a>
+
+    </div>
+
+    <table class="orders-table">
+
+      <thead>
+
+        <tr>
+
+          <th>ORDER ID</th>
+          <th>DATE</th>
+          <th>ITEMS</th>
+          <th>STATUS</th>
+          <th>AMOUNT</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>ORD-1248</td>
+          <td>May 31, 2024</td>
+          <td>2 Diamonds</td>
+
+          <td>
+
+            <span class="status confirmed">
+              Confirmed
+            </span>
+
+          </td>
+
+          <td>$24,690</td>
+
+        </tr>
+
+        <tr>
+
+          <td>ORD-1187</td>
+          <td>May 25, 2024</td>
+          <td>1 Diamond</td>
+
+          <td>
+
+            <span class="status progress">
+              In Production
+            </span>
+
+          </td>
+
+          <td>$7,850</td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- VOLUME LEVELS -->
+
+  <div class="panel levels-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Volume Levels
+      </h3>
+
+    </div>
+
+    <table class="volume-table">
+
+      <thead>
+
+        <tr>
+
+          <th>LEVEL</th>
+          <th>PCT</th>
+          <th>RANGE</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr class="active">
+
+          <td>V0</td>
+          <td>0%</td>
+          <td>&lt; 12.5k</td>
+
+        </tr>
+
+        <tr>
+
+          <td>V1</td>
+          <td>0.25%</td>
+          <td>12.5k - 25k</td>
+
+        </tr>
+
+        <tr>
+
+          <td>V2</td>
+          <td>0.50%</td>
+          <td>25k - 50k</td>
+
+        </tr>
+
+        <tr>
+
+          <td>V3</td>
+          <td>1.00%</td>
+          <td>50k - 75k</td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- SHORTLIST -->
+
+  <div class="panel shortlist-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Your Shortlist
+      </h3>
+
+      <a href="#">
+        View all
+      </a>
+
+    </div>
+
+    <div class="shortlist-wrapper">
+
+      <!-- LEFT -->
+
+      <button
+        class="carousel-btn left"
+        (click)="scrollLeft()"
+      >
+
+        <lucide-icon [img]="ChevronLeft">
+        </lucide-icon>
+
+      </button>
+
+      <!-- CAROUSEL -->
+
+      <div
+        class="diamond-carousel"
+        #diamondCarousel
+      >
+
+        <!-- CARD -->
+
+        <div class="diamond-card">
+
+          <div class="diamond-image">
+
+            <img
+              src="assets/images/diamonds/diamond-1.jpg"
+              alt=""
+            >
+
+          </div>
+
+          <div class="diamond-info">
+
+            <div class="diamond-top">
+
+              <h4>
+                KG-04201
+              </h4>
+
+              <lucide-icon [img]="Heart">
+              </lucide-icon>
+
+            </div>
+
+            <p>
+              3.21 ct &bull; D &bull; VVS1 &bull; 3EX
+            </p>
+
+            <div class="diamond-footer">
+
+              <strong>
+                $18,450
+              </strong>
+
+              <button>
+                View Details
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="diamond-card">
+
+          <div class="diamond-image">
+
+            <img
+              src="assets/images/diamonds/diamond-2.jpg"
+              alt=""
+            >
+
+          </div>
+
+          <div class="diamond-info">
+
+            <div class="diamond-top">
+
+              <h4>
+                KG-03788
+              </h4>
+
+              <lucide-icon [img]="Heart">
+              </lucide-icon>
+
+            </div>
+
+            <p>
+              3.02 ct &bull; E &bull; VVS2 &bull; 3EX
+            </p>
+
+            <div class="diamond-footer">
+
+              <strong>
+                $16,750
+              </strong>
+
+              <button>
+                View Details
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="diamond-card">
+
+          <div class="diamond-image">
+
+            <img
+              src="assets/images/diamonds/diamond-3.jpg"
+              alt=""
+            >
+
+          </div>
+
+          <div class="diamond-info">
+
+            <div class="diamond-top">
+
+              <h4>
+                KG-02814
+              </h4>
+
+              <lucide-icon [img]="Heart">
+              </lucide-icon>
+
+            </div>
+
+            <p>
+              1.82 ct &bull; F &bull; VS1 &bull; 3EX
+            </p>
+
+            <div class="diamond-footer">
+
+              <strong>
+                $6,240
+              </strong>
+
+              <button>
+                View Details
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="diamond-card">
+
+          <div class="diamond-image">
+
+            <img
+              src="assets/images/diamonds/diamond-4.jpg"
+              alt=""
+            >
+
+          </div>
+
+          <div class="diamond-info">
+
+            <div class="diamond-top">
+
+              <h4>
+                KG-01933
+              </h4>
+
+              <lucide-icon [img]="Heart">
+              </lucide-icon>
+
+            </div>
+
+            <p>
+              1.23 ct &bull; E &bull; VS2 &bull; 3EX
+            </p>
+
+            <div class="diamond-footer">
+
+              <strong>
+                $3,920
+              </strong>
+
+              <button>
+                View Details
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <button
+        class="carousel-btn right"
+        (click)="scrollRight()"
+      >
+
+        <lucide-icon [img]="ChevronRight">
+        </lucide-icon>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- SHIPMENT -->
+
+  <div class="panel shipment-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Shipment Info
+      </h3>
+
+    </div>
+
+    <div class="shipment-box">
+
+      <p>
+        Current shipment is under customs clearance.
+      </p>
+
+      <p>
+        Expected delivery:
+        <strong>
+          12 June 2026
+        </strong>
+      </p>
+
+      <p>
+        AWB:
+        <strong>
+          EK-982345
+        </strong>
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- PAYMENT -->
+
+  <div class="panel payment-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Payment Instructions
+      </h3>
+
+    </div>
+
+    <!-- TABS -->
+
+    <div class="payment-tabs">
+
+      <button
+        [class.active]="activePaymentTab === 'india'"
+        (click)="setPaymentTab('india')"
+      >
+        India
+      </button>
+
+      <button
+        [class.active]="activePaymentTab === 'hongkong'"
+        (click)="setPaymentTab('hongkong')"
+      >
+        Hong Kong
+      </button>
+
+    </div>
+
+    <!-- INDIA -->
+
+    <ng-container *ngIf="activePaymentTab === 'india'">
+
+      <div class="payment-detail-block">
+
+        <h4>
+          YES BANK LIMITED MUMBAI
+        </h4>
+
+        <div class="payment-details">
+
+          <p>
+
+            <strong>
+              Beneficiary:
+            </strong>
+
+            KAPU GEMS LLP
+
+          </p>
+
+          <p>
+
+            <strong>
+              Address:
+            </strong>
+
+            EC-3021, Bharat Diamond Bourse,
+            BKC, Bandra (E), Mumbai, India
+
+          </p>
+
+          <p>
+
+            <strong>
+              Bank:
+            </strong>
+
+            YES BANK LIMITED
+
+          </p>
+
+          <p>
+
+            <strong>
+              A/c No:
+            </strong>
+
+            018981300000014
+
+          </p>
+
+          <p>
+
+            <strong>
+              SWIFT:
+            </strong>
+
+            YESBINBB
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+    <!-- HONG KONG -->
+
+    <ng-container *ngIf="activePaymentTab === 'hongkong'">
+
+      <div class="payment-detail-block">
+
+        <h4>
+          HSBC HONG KONG
+        </h4>
+
+        <div class="payment-details">
+
+          <p>
+
+            <strong>
+              Beneficiary:
+            </strong>
+
+            KAPU GEMS HK LTD
+
+          </p>
+
+          <p>
+
+            <strong>
+              Bank:
+            </strong>
+
+            HSBC Hong Kong
+
+          </p>
+
+          <p>
+
+            <strong>
+              SWIFT:
+            </strong>
+
+            HSBCHKHHHKH
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+<!-- RECENT SEARCH -->
+
+  <div class="panel recent-search-panel">
+
+    <div class="panel-header">
+
+      <h3>
+        Recent Search
+      </h3>
+
+      <a href="#">
+        View all
+      </a>
+
+    </div>
+
+    <div class="recent-search-list">
+
+      <div class="search-item">
+
+        <div class="search-icon">
+          <lucide-icon [img]="Search">
+          </lucide-icon>
+        </div>
+
+        <div class="search-info">
+
+          <h4>
+            Round 2.00 - 3.00 ct
+          </h4>
+
+          <p>
+            D &bull; VVS1 &bull; Triple EX
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="search-item">
+
+        <div class="search-icon">
+          <lucide-icon [img]="Gem">
+          </lucide-icon>
+        </div>
+
+        <div class="search-info">
+
+          <h4>
+            Oval Collection
+          </h4>
+
+          <p>
+            F &bull; VS1 &bull; Excellent
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TRUST -->
+
+<section class="trust-banner">
+
+  <div class="trust-left">
+
+    <div class="shield">
+
+      <lucide-icon
+        [img]="ShieldCheck"
+      >
+      </lucide-icon>
+
+    </div>
+
+    <div>
+
+      <h4>
+        Your trust is our greatest asset.
+      </h4>
+
+      <p>
+        We are here to make your diamond journey exceptional.
+      </p>
+
+    </div>
+
+  </div>
+
+  <button class="explore-btn">
+
+    Explore Diamonds &rarr;
+
+  </button>
+
+</section>

@@ -1,0 +1,269 @@
+<header class="topbar">
+
+  <!-- LEFT -->
+
+  <div class="topbar-left">
+
+    <!-- FILTER -->
+
+    <div class="stock-filter">
+
+      <select aria-label="Inventory category">
+
+        <option>
+          Stock Search
+        </option>
+
+        <option>
+          Certified
+        </option>
+
+        <option>
+          Ready Stock
+        </option>
+
+      </select>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-bar">
+
+      <lucide-icon
+        class="search-icon"
+        [img]="Search"
+      >
+      </lucide-icon>
+
+      <input
+        type="text"
+        placeholder="Search diamonds..."
+      >
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="topbar-right">
+
+    <!-- CART -->
+
+    <button
+      class="icon-btn cart-btn"
+      type="button"
+      aria-label="Cart"
+    >
+
+      <span class="cart-count">
+        2
+      </span>
+
+      <lucide-icon [img]="ShoppingCart"></lucide-icon>
+
+    </button>
+
+    <!-- PROFILE -->
+
+    <button
+      class="profile-btn"
+      type="button"
+      (click)="toggleProfileModal()"
+    >
+
+      <div class="profile-avatar">
+        AS
+      </div>
+
+      <div class="profile-info">
+
+        <span>
+          Ananya Shah
+        </span>
+
+        <small>
+          Profile
+        </small>
+
+      </div>
+
+    </button>
+
+    <!-- LOGOUT -->
+
+    <button
+      class="logout-btn"
+      type="button"
+    >
+
+      <lucide-icon [img]="LogOut"></lucide-icon>
+
+      Logout
+
+    </button>
+
+  </div>
+
+</header>
+
+<!-- PROFILE MODAL -->
+
+<div
+  class="profile-modal-overlay"
+  *ngIf="showProfileModal"
+>
+
+  <div class="profile-modal">
+
+    <!-- HEADER -->
+
+    <div class="profile-modal-header">
+
+      <div>
+
+        <h2>
+          User Profile
+        </h2>
+
+        <p>
+          Update your account details
+        </p>
+
+      </div>
+
+      <button
+        class="close-btn"
+        type="button"
+        aria-label="Close profile modal"
+        (click)="toggleProfileModal()"
+      >
+        <lucide-icon [img]="X"></lucide-icon>
+      </button>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="profile-form">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Name
+          </label>
+
+          <input
+            type="text"
+            value="Guest"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            value=""
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Mobile
+          </label>
+
+          <input
+            type="text"
+            value=""
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            City
+          </label>
+
+          <input
+            type="text"
+            value="Mumbai"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-group full-width">
+
+        <label>
+          Building / Area
+        </label>
+
+        <input
+          type="text"
+          value="EC-3021 N.A., Bandra (East)"
+        >
+
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            State
+          </label>
+
+          <input
+            type="text"
+            value="Maharashtra"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            PIN / ZIP
+          </label>
+
+          <input
+            type="text"
+            value="400051"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- ACTION -->
+
+      <div class="profile-action">
+
+        <button
+          class="update-btn"
+          type="button"
+        >
+
+          Update Profile
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

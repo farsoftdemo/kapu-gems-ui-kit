@@ -1,0 +1,11 @@
+@import 'variables';
+
+button {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 12px;
+  background: $kg-muted-gold;
+  color: white;
+  font-weight: 600;
+}

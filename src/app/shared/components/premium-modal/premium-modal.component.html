@@ -1,0 +1,67 @@
+<div
+  class="premium-modal-overlay"
+  *ngIf="isOpen"
+>
+
+  <div class="premium-modal">
+
+    <!-- CLOSE -->
+
+    <button
+      class="close-btn"
+      type="button"
+      aria-label="Close premium notice"
+      (click)="onClose()"
+    >
+      <lucide-icon [img]="X"></lucide-icon>
+    </button>
+
+    <!-- CONTENT -->
+
+    <div class="modal-content">
+
+      <div class="modal-badge">
+
+        <lucide-icon [img]="Sparkles"></lucide-icon>
+
+        Premium Notice
+
+      </div>
+
+      <h2>
+        Welcome to Kapu Gems
+      </h2>
+
+      <p>
+        Explore certified diamonds,
+        exclusive collections,
+        live inventory and premium
+        trading opportunities crafted
+        for global buyers.
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          class="secondary-btn"
+          type="button"
+          (click)="onClose()"
+        >
+          Maybe Later
+        </button>
+
+        <button
+          class="primary-btn"
+          type="button"
+          (click)="onClose()"
+        >
+          Explore Platform
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

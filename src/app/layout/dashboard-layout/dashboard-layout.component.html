@@ -1,0 +1,25 @@
+<div
+  class="dashboard-shell"
+  [class.sidebar-collapsed]="sidebarCollapsed"
+>
+
+  <app-sidebar
+    (collapsedChange)="sidebarCollapsed = $event"
+  >
+  </app-sidebar>
+
+  <div class="layout-right">
+
+    <app-header></app-header>
+
+    <main class="page-content">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+    <app-footer></app-footer>
+
+  </div>
+
+</div>

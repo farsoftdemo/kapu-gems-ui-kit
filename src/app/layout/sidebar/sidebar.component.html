@@ -1,0 +1,307 @@
+
+<button
+  class="mobile-menu-btn"
+  [class.is-open]="mobileSidebarOpen"
+  type="button"
+  [attr.aria-label]="mobileSidebarOpen ? 'Close navigation' : 'Open navigation'"
+  (click)="toggleMobileSidebar()"
+>
+
+  <lucide-icon
+    [img]="mobileSidebarOpen ? X : Menu"
+  >
+  </lucide-icon>
+
+</button>
+
+<button
+  class="mobile-sidebar-backdrop"
+  type="button"
+  aria-label="Close navigation"
+  *ngIf="mobileSidebarOpen"
+  (click)="closeMobileSidebar()"
+>
+</button>
+
+<aside
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+   [class.mobile-open]="mobileSidebarOpen"
+>
+
+  <!-- TOP -->
+
+  <div class="sidebar-top">
+
+    <div class="logo">
+
+      <span class="logo-full">
+        KAPU GEMS
+      </span>
+
+      <span class="logo-mini">
+        KG
+      </span>
+
+    </div>
+
+    <button
+      class="collapse-btn"
+      type="button"
+      aria-label="Collapse sidebar"
+      (click)="toggleSidebar()"
+    >
+
+      <lucide-icon
+        [img]="isCollapsed ? ChevronRight : ChevronLeft"
+      >
+      </lucide-icon>
+
+    </button>
+
+  </div>
+
+  <!-- MENU -->
+
+  <nav
+    class="menu"
+    (click)="closeMobileSidebar()"
+  >
+
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="LayoutDashboard"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Dashboard
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/stock-search"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="Search"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Stock Search
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/early-bird"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="Sparkles"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Early Bird
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/new-arrivals"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="Gem"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        New Arrivals
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/recommended"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="HandCoins"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Recommended
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/my-request"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="ClipboardList"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        My Request
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/cart"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="ShoppingCart"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Cart
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/shipment"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="Truck"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Shipment
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/tracklist"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="ClipboardList"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        TrackList
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/business-policy"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="FileText"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Business Policy
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/view-demand"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="Eye"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        View Demand
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/purchase"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="ShoppingBag"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Purchase
+      </span>
+
+    </a>
+
+    <a
+      routerLink="/edit-password"
+      routerLinkActive="active"
+      class="menu-item"
+    >
+
+      <lucide-icon
+        [img]="KeyRound"
+        class="menu-icon"
+      >
+      </lucide-icon>
+
+      <span class="menu-label">
+        Edit Password
+      </span>
+
+    </a>
+
+  </nav>
+
+</aside>
