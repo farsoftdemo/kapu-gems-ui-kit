@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 import {
   LucideAngularModule,
@@ -101,7 +101,6 @@ type NoticeAd = {
 
   imports: [
     CommonModule,
-    RouterLink,
     LucideAngularModule,
     NgApexchartsModule,
     PremiumModalComponent
@@ -203,7 +202,9 @@ showEarlyBirdMenu = false;
 
   public pieChartOptions: PieChartOptions;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
 
     /* LINE CHART */
 
@@ -350,6 +351,11 @@ showEarlyBirdMenu = false;
   closeWelcomeModal(): void {
 
     this.showWelcomeModal = false;
+  }
+
+  openStockSearch(): void {
+
+    this.router.navigate(['/stock-search']);
   }
 
   /* =========================

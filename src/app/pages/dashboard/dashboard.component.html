@@ -12,7 +12,14 @@
 
   <!-- STOCK SEARCH -->
 
-  <div class="stat-card">
+  <div
+    class="stat-card stat-card-action"
+    role="button"
+    tabindex="0"
+    (click)="openStockSearch()"
+    (keydown.enter)="openStockSearch()"
+    (keydown.space)="openStockSearch(); $event.preventDefault()"
+  >
 
     <div class="stat-icon">
 
@@ -31,9 +38,13 @@
         Stock Search
       </h2>
 
-      <a [routerLink]="['/stock-search']">
+      <button
+        class="stat-link"
+        type="button"
+        (click)="openStockSearch(); $event.stopPropagation()"
+      >
         Explore &rarr;
-      </a>
+      </button>
 
     </div>
 

@@ -990,14 +990,23 @@ h2 {
   color: #2b2622;
 }
 
-  a {
+  a,
+  .stat-link {
     color: #b89257;
+
+    border: 0;
+
+    padding: 0;
+
+    background: transparent;
 
     font-size: 12px;
 
     font-weight: 500;
 
     text-decoration: none;
+
+    cursor: pointer;
 
     transition: all 0.25s ease;
 
@@ -1115,6 +1124,15 @@ h2 {
 
   small {
     color: #b7a998;
+  }
+}
+
+.stat-card-action {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid rgba(184,146,87,0.42);
+    outline-offset: 3px;
   }
 }
 
