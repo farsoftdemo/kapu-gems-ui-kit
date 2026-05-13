@@ -248,6 +248,99 @@
 
 </section>
 
+<!-- NOTICE ADS -->
+
+<section class="notice-ads-section">
+
+  <div class="notice-section-header">
+
+    <div>
+
+      <small>
+        CLIENT NOTICES
+      </small>
+
+      <h3>
+        Events, Auctions & Announcements
+      </h3>
+
+    </div>
+
+    <div class="notice-controls">
+
+      <button
+        type="button"
+        aria-label="Previous notice"
+        (click)="previousNotice()"
+      >
+        <lucide-icon [img]="ChevronLeft">
+        </lucide-icon>
+      </button>
+
+      <button
+        type="button"
+        aria-label="Next notice"
+        (click)="nextNotice()"
+      >
+        <lucide-icon [img]="ChevronRight">
+        </lucide-icon>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="notice-slider">
+
+    <article
+      class="notice-slide"
+      *ngFor="let notice of noticeAds; let i = index"
+      [class.active]="getNoticePosition(i) === 'active'"
+      [class.previous]="getNoticePosition(i) === 'previous'"
+      [class.next]="getNoticePosition(i) === 'next'"
+      [class.hidden]="getNoticePosition(i) === 'hidden'"
+    >
+
+      <img
+        [src]="notice.image"
+        [alt]="notice.title"
+      >
+
+      <div class="notice-overlay">
+
+        <small>
+          {{ notice.eyebrow }}
+        </small>
+
+        <h4>
+          {{ notice.title }}
+        </h4>
+
+        <p>
+          {{ notice.description }}
+        </p>
+
+      </div>
+
+    </article>
+
+  </div>
+
+  <div class="notice-dots">
+
+    <button
+      *ngFor="let notice of noticeAds; let i = index"
+      type="button"
+      [class.active]="i === activeNoticeIndex"
+      [attr.aria-label]="'Show notice ' + (i + 1)"
+      (click)="setNotice(i)"
+    >
+    </button>
+
+  </div>
+
+</section>
+
 <!-- DASHBOARD GRID -->
 
 <section class="dashboard-grid">
