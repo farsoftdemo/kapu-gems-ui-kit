@@ -296,15 +296,15 @@
 .demand-action {
   height: 40px;
 
-  border: 1px solid #dbc9ee;
+  border: 1px solid #d9c6aa;
 
   border-radius: 12px;
 
   background:
     linear-gradient(
       135deg,
-      #f2ecff,
-      #ded2f8
+      #fffaf0,
+      #ead6b4
     );
 
   color: #2b2622;
@@ -323,7 +323,7 @@
     transform: translateY(-1px);
 
     box-shadow:
-      0 12px 22px rgba(111,82,146,0.14);
+      0 12px 22px rgba(184,146,87,0.16);
   }
 }
 
