@@ -2,7 +2,7 @@
 
   <div class="search-hero">
 
-    <div>
+    <div class="hero-copy">
 
       <small>
         PREMIUM INVENTORY SEARCH
@@ -15,6 +15,43 @@
       <p>
         Find certified diamonds by shape, grading, measurement and commercial preferences.
       </p>
+
+      <div class="hero-preferences">
+
+        <div class="status-control">
+
+          <span>
+            Status
+          </span>
+
+          <button
+            type="button"
+            [class.active]="status === 'All'"
+            (click)="status = 'All'"
+          >
+            All
+          </button>
+
+          <button
+            type="button"
+            [class.active]="status === 'New Arrival'"
+            (click)="status = 'New Arrival'"
+          >
+            New Arrival
+          </button>
+
+        </div>
+
+        <label class="unseen-control">
+          <input
+            type="checkbox"
+            [(ngModel)]="unseenOnly"
+          >
+
+          Unseen only
+        </label>
+
+      </div>
 
     </div>
 
@@ -41,81 +78,26 @@
         Search Stock
       </button>
 
+      <div class="demand-controls">
+
+        <button
+          class="demand-action"
+          type="button"
+        >
+          Save As Demand
+        </button>
+
+        <select [(ngModel)]="demandView">
+          <option value="Search Demand">Search Demand</option>
+          <option value="My Demand">My Demand</option>
+          <option value="Shared Demand">Shared Demand</option>
+        </select>
+
+      </div>
+
     </div>
 
   </div>
-
-  <section class="search-command-bar">
-
-    <div class="status-control">
-
-      <span>
-        Status:
-      </span>
-
-      <button
-        type="button"
-        [class.active]="status === 'All'"
-        (click)="status = 'All'"
-      >
-        All
-      </button>
-
-      <button
-        type="button"
-        [class.active]="status === 'New Arrival'"
-        (click)="status = 'New Arrival'"
-      >
-        New Arrival
-      </button>
-
-    </div>
-
-    <label class="unseen-control">
-      <input
-        type="checkbox"
-        [(ngModel)]="unseenOnly"
-      >
-
-      Unseen
-    </label>
-
-    <div class="command-actions">
-
-      <button
-        class="secondary-action"
-        type="button"
-        (click)="resetSearch()"
-      >
-        Reset Search
-      </button>
-
-      <button
-        class="primary-action"
-        type="button"
-      >
-        <lucide-icon [img]="Search">
-        </lucide-icon>
-
-        Search
-      </button>
-
-      <button
-        class="secondary-action soft"
-        type="button"
-      >
-        Save As Demand
-      </button>
-
-      <select [(ngModel)]="demandView">
-        <option value="Search Demand">Search Demand</option>
-        <option value="My Demand">My Demand</option>
-        <option value="Shared Demand">Shared Demand</option>
-      </select>
-
-    </div>
-
-  </section>
 
   <section class="search-card">
 
