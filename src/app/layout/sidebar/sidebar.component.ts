@@ -28,7 +28,8 @@ import {
   Menu,
   X,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from 'lucide-angular';
 
 @Component({
@@ -90,6 +91,28 @@ export class SidebarComponent {
   readonly ChevronLeft = ChevronLeft;
 
   readonly ChevronRight = ChevronRight;
+
+  readonly ChevronDown = ChevronDown;
+
+  openSubmenus: Record<string, boolean> = {
+    stock: true
+  };
+
+  isSubmenuOpen(menu: string): boolean {
+
+    return !!this.openSubmenus[menu];
+  }
+
+  toggleSubmenu(
+    menu: string,
+    event: Event
+  ): void {
+
+    event.stopPropagation();
+
+    this.openSubmenus[menu] =
+      !this.openSubmenus[menu];
+  }
 
   toggleMobileSidebar(): void {
 

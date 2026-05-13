@@ -86,41 +86,129 @@
 
     </a>
 
-    <a
-      routerLink="/stock-search"
-      routerLinkActive="active"
-      class="menu-item"
+    <div
+      class="menu-group"
+      [class.open]="isSubmenuOpen('stock')"
     >
 
-      <lucide-icon
-        [img]="Search"
-        class="menu-icon"
+      <button
+        class="menu-item submenu-trigger"
+        type="button"
+        (click)="toggleSubmenu('stock', $event)"
       >
-      </lucide-icon>
 
-      <span class="menu-label">
-        Stock Search
-      </span>
+        <lucide-icon
+          [img]="Search"
+          class="menu-icon"
+        >
+        </lucide-icon>
 
-    </a>
+        <span class="menu-label">
+          Stock Search
+        </span>
 
-    <a
-      routerLink="/early-bird"
-      routerLinkActive="active"
-      class="menu-item"
+        <lucide-icon
+          [img]="ChevronDown"
+          class="submenu-chevron"
+        >
+        </lucide-icon>
+
+      </button>
+
+      <div
+        class="submenu"
+        *ngIf="isSubmenuOpen('stock')"
+      >
+
+        <a
+          routerLink="/stock-search"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Certified Diamonds
+        </a>
+
+        <a
+          routerLink="/stock-search/fancy"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Fancy Shapes
+        </a>
+
+        <a
+          routerLink="/stock-search/saved"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Saved Searches
+        </a>
+
+      </div>
+
+    </div>
+
+    <div
+      class="menu-group"
+      [class.open]="isSubmenuOpen('earlyBird')"
     >
 
-      <lucide-icon
-        [img]="Sparkles"
-        class="menu-icon"
+      <button
+        class="menu-item submenu-trigger"
+        type="button"
+        (click)="toggleSubmenu('earlyBird', $event)"
       >
-      </lucide-icon>
 
-      <span class="menu-label">
-        Early Bird
-      </span>
+        <lucide-icon
+          [img]="Sparkles"
+          class="menu-icon"
+        >
+        </lucide-icon>
 
-    </a>
+        <span class="menu-label">
+          Early Bird
+        </span>
+
+        <lucide-icon
+          [img]="ChevronDown"
+          class="submenu-chevron"
+        >
+        </lucide-icon>
+
+      </button>
+
+      <div
+        class="submenu"
+        *ngIf="isSubmenuOpen('earlyBird')"
+      >
+
+        <a
+          routerLink="/early-bird/search"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Search
+        </a>
+
+        <a
+          routerLink="/early-bird/short-list"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Bid Short List
+        </a>
+
+        <a
+          routerLink="/early-bird/my-bid"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          My Bid
+        </a>
+
+      </div>
+
+    </div>
 
     <a
       routerLink="/new-arrivals"
@@ -266,23 +354,67 @@
 
     </a>
 
-    <a
-      routerLink="/purchase"
-      routerLinkActive="active"
-      class="menu-item"
+    <div
+      class="menu-group"
+      [class.open]="isSubmenuOpen('purchase')"
     >
 
-      <lucide-icon
-        [img]="ShoppingBag"
-        class="menu-icon"
+      <button
+        class="menu-item submenu-trigger"
+        type="button"
+        (click)="toggleSubmenu('purchase', $event)"
       >
-      </lucide-icon>
 
-      <span class="menu-label">
-        Purchase
-      </span>
+        <lucide-icon
+          [img]="ShoppingBag"
+          class="menu-icon"
+        >
+        </lucide-icon>
 
-    </a>
+        <span class="menu-label">
+          Purchase
+        </span>
+
+        <lucide-icon
+          [img]="ChevronDown"
+          class="submenu-chevron"
+        >
+        </lucide-icon>
+
+      </button>
+
+      <div
+        class="submenu"
+        *ngIf="isSubmenuOpen('purchase')"
+      >
+
+        <a
+          routerLink="/purchase/orders"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Orders
+        </a>
+
+        <a
+          routerLink="/purchase/invoices"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Invoices
+        </a>
+
+        <a
+          routerLink="/purchase/payments"
+          routerLinkActive="active"
+          class="submenu-item"
+        >
+          Payments
+        </a>
+
+      </div>
+
+    </div>
 
     <a
       routerLink="/edit-password"
