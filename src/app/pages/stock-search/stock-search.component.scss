@@ -12,7 +12,7 @@
 }
 
 .search-hero,
-.selected-panel,
+.search-command-bar,
 .search-card,
 .advanced-toggle {
   background: #fcfaf7;
@@ -161,81 +161,119 @@
   }
 }
 
-.selected-panel {
+.search-command-bar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
 
-  gap: 14px;
+  gap: 16px;
 
   border-radius: 18px;
 
-  padding: 16px;
+  padding: 12px 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2d2b29,
+      #1f1d1b
+    );
+
+  border-color: rgba(255,255,255,0.08);
 }
 
-.selected-title {
-  display: inline-flex;
+.status-control,
+.command-actions,
+.unseen-control {
+  display: flex;
   align-items: center;
+}
 
+.status-control {
   gap: 8px;
 
-  min-width: 136px;
+  span {
+    color: white;
 
-  color: #2b2622;
+    font-size: 14px;
+
+    font-weight: 800;
+  }
+
+  button {
+    min-width: 58px;
+    height: 38px;
+
+    border: 1px solid #d8cbbf;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #2b2622;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+
+    &.active {
+      border-color: #d7c9fa;
+
+      background: #e4d8ff;
+
+      box-shadow:
+        0 8px 16px rgba(111,82,146,0.12);
+    }
+  }
+}
+
+.unseen-control {
+  gap: 7px;
+
+  margin-left: auto;
+
+  color: white;
 
   font-size: 13px;
 
   font-weight: 700;
 
-  lucide-icon {
-    width: 16px;
-    height: 16px;
+  input {
+    width: 18px;
+    height: 18px;
 
-    color: #b89257;
+    accent-color: #b89257;
   }
 }
 
-.selected-chips {
-  display: flex;
-  flex-wrap: wrap;
+.command-actions {
+  gap: 10px;
 
-  gap: 8px;
+  select {
+    height: 40px;
+
+    border: 1px solid rgba(255,255,255,0.20);
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #2b2622;
+
+    padding: 0 12px;
+
+    font-size: 13px;
+  }
 }
 
-.selected-chip {
-  min-height: 32px;
+.secondary-action.soft {
+  background: #e4d8ff;
 
-  border: 1px solid #e4d5c3;
-
-  border-radius: 999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fffdf9,
-      #f7efe5
-    );
-
-  color: #5f5045;
-
-  padding:
-    0
-    10px
-    0
-    12px;
-
-  display: inline-flex;
-  align-items: center;
-
-  gap: 7px;
-
-  cursor: pointer;
-
-  font-size: 12px;
-
-  lucide-icon {
-    width: 13px;
-    height: 13px;
-  }
+  border-color: #d7c9fa;
 }
 
 .search-card {
@@ -487,64 +525,40 @@
   }
 }
 
-.shape-mark {
-  width: 34px;
-  height: 34px;
+.shape-svg {
+  width: 42px;
+  height: 42px;
 
-  border: 1.5px solid #2b2622;
+  overflow: visible;
 
-  background:
-    radial-gradient(
-      circle at 34% 30%,
-      rgba(255,255,255,0.85),
-      rgba(200,166,106,0.15)
-    );
+  stroke: #2b2622;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(0 5px 8px rgba(43,38,34,0.08));
+
+  * {
+    fill: none;
+  }
+
+  > g > :first-child {
+    fill:
+      rgba(255,255,255,0.80);
+  }
 }
 
-.shape-mark.round,
-.shape-mark.oval {
-  border-radius: 50%;
-}
+.shape-tile.selected .shape-svg {
+  stroke: #7f5d2d;
 
-.shape-mark.princess,
-.shape-mark.radiant,
-.shape-mark.sq-emerald {
-  border-radius: 4px;
-}
-
-.shape-mark.cushion,
-.shape-mark.cushion-mod {
-  border-radius: 11px;
-}
-
-.shape-mark.emerald,
-.shape-mark.baguette {
-  width: 26px;
-
-  border-radius: 5px;
-}
-
-.shape-mark.pear {
-  border-radius: 50% 50% 50% 8px;
-
-  transform: rotate(-45deg);
-}
-
-.shape-mark.heart {
-  border-radius: 50% 50% 45% 45%;
-}
-
-.shape-mark.marquise {
-  width: 22px;
-
-  border-radius: 50% 0 50% 0;
-
-  transform: rotate(45deg);
-}
-
-.shape-mark.special,
-.shape-mark.other {
-  clip-path: polygon(50% 0, 100% 36%, 82% 100%, 18% 100%, 0 36%);
+  > g > :first-child {
+    fill:
+      rgba(255,247,231,0.94);
+  }
 }
 
 .range-pair {
@@ -637,6 +651,18 @@
   gap: 14px;
 }
 
+.additional-card {
+  order: 1;
+}
+
+.inclusion-card {
+  order: 2;
+}
+
+.measurement-card {
+  order: 3;
+}
+
 @media(max-width: 1200px) {
 
   .four-column-row {
@@ -648,10 +674,19 @@
 @media(max-width: 900px) {
 
   .search-hero,
-  .selected-panel {
+  .search-command-bar {
     flex-direction: column;
 
     align-items: stretch;
+  }
+
+  .status-control,
+  .command-actions {
+    flex-wrap: wrap;
+  }
+
+  .unseen-control {
+    margin-left: 0;
   }
 
   .hero-actions {
@@ -686,6 +721,16 @@
   .primary-action,
   .secondary-action {
     padding: 0 12px;
+  }
+
+  .command-actions {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    select {
+      width: 100%;
+    }
   }
 
   .filter-row {

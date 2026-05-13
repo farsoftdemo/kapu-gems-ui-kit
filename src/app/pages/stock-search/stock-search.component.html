@@ -45,33 +45,73 @@
 
   </div>
 
-  <section
-    class="selected-panel"
-    *ngIf="selectedChips.length"
-  >
+  <section class="search-command-bar">
 
-    <div class="selected-title">
+    <div class="status-control">
 
-      <lucide-icon [img]="Sparkles">
-      </lucide-icon>
+      <span>
+        Status:
+      </span>
 
-      Selected filters
+      <button
+        type="button"
+        [class.active]="status === 'All'"
+        (click)="status = 'All'"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        [class.active]="status === 'New Arrival'"
+        (click)="status = 'New Arrival'"
+      >
+        New Arrival
+      </button>
 
     </div>
 
-    <div class="selected-chips">
+    <label class="unseen-control">
+      <input
+        type="checkbox"
+        [(ngModel)]="unseenOnly"
+      >
+
+      Unseen
+    </label>
+
+    <div class="command-actions">
 
       <button
-        *ngFor="let chip of selectedChips"
-        class="selected-chip"
+        class="secondary-action"
         type="button"
-        (click)="removeChip(chip)"
+        (click)="resetSearch()"
       >
-        {{ chip }}
-
-        <lucide-icon [img]="X">
-        </lucide-icon>
+        Reset Search
       </button>
+
+      <button
+        class="primary-action"
+        type="button"
+      >
+        <lucide-icon [img]="Search">
+        </lucide-icon>
+
+        Search
+      </button>
+
+      <button
+        class="secondary-action soft"
+        type="button"
+      >
+        Save As Demand
+      </button>
+
+      <select [(ngModel)]="demandView">
+        <option value="Search Demand">Search Demand</option>
+        <option value="My Demand">My Demand</option>
+        <option value="Shared Demand">Shared Demand</option>
+      </select>
 
     </div>
 
@@ -138,11 +178,81 @@
             [class.selected]="isSelected('shape', shape.label)"
             (click)="toggleSelection('shape', shape.label)"
           >
-            <span
-              class="shape-mark"
-              [ngClass]="shape.iconClass"
+            <svg
+              class="shape-svg"
+              viewBox="0 0 64 64"
+              aria-hidden="true"
+              [ngSwitch]="shape.iconClass"
             >
-            </span>
+              <g *ngSwitchCase="'round'">
+                <circle cx="32" cy="32" r="24"></circle>
+                <path d="M32 8 18 18 8 32 18 46 32 56 46 46 56 32 46 18Z"></path>
+                <path d="M18 18 32 56 46 18M8 32h48M32 8v48"></path>
+              </g>
+
+              <g *ngSwitchCase="'princess'">
+                <rect x="12" y="12" width="40" height="40"></rect>
+                <path d="M12 12 32 24 52 12M12 52 32 40 52 52M12 12l40 40M52 12 12 52M32 24v16"></path>
+              </g>
+
+              <g *ngSwitchCase="'cushion-mod'">
+                <rect x="12" y="12" width="40" height="40" rx="11"></rect>
+                <path d="M20 14 44 14 50 24 50 40 40 50 24 50 14 40 14 24Z"></path>
+                <path d="M20 14 32 50 44 14M14 32h36M32 14v36"></path>
+              </g>
+
+              <g *ngSwitchCase="'cushion'">
+                <rect x="13" y="13" width="38" height="38" rx="9"></rect>
+                <path d="M21 13 43 13 51 32 43 51 21 51 13 32Z"></path>
+                <path d="M21 13 32 51 43 13M13 32h38"></path>
+              </g>
+
+              <g *ngSwitchCase="'emerald'">
+                <path d="M18 10h28l8 8v28l-8 8H18l-8-8V18Z"></path>
+                <path d="M18 10v44M46 10v44M10 18h44M10 46h44M18 18h28v28H18Z"></path>
+              </g>
+
+              <g *ngSwitchCase="'sq-emerald'">
+                <path d="M18 10h28l8 8v28l-8 8H18l-8-8V18Z"></path>
+                <path d="M18 18h28v28H18ZM10 18l8 8M54 18l-8 8M10 46l8-8M54 46l-8-8"></path>
+              </g>
+
+              <g *ngSwitchCase="'radiant'">
+                <path d="M16 10h32l6 6v32l-6 6H16l-6-6V16Z"></path>
+                <path d="M16 10 32 22 48 10M16 54 32 42 48 54M10 16l44 32M54 16 10 48M32 22v20"></path>
+              </g>
+
+              <g *ngSwitchCase="'pear'">
+                <path d="M32 6C19 21 12 32 12 42c0 11 9 18 20 18s20-7 20-18C52 32 45 21 32 6Z"></path>
+                <path d="M32 6v54M18 31h28M16 44l16-38 16 38M20 52l12-21 12 21"></path>
+              </g>
+
+              <g *ngSwitchCase="'oval'">
+                <ellipse cx="32" cy="32" rx="19" ry="27"></ellipse>
+                <path d="M32 5 19 15 13 32 19 49 32 59 45 49 51 32 45 15Z"></path>
+                <path d="M19 15 32 59 45 15M13 32h38M32 5v54"></path>
+              </g>
+
+              <g *ngSwitchCase="'heart'">
+                <path d="M32 56C18 43 10 34 10 24c0-8 6-14 14-14 4 0 7 2 8 5 1-3 4-5 8-5 8 0 14 6 14 14 0 10-8 19-22 32Z"></path>
+                <path d="M32 15v41M15 25h34M20 39l12-24 12 24"></path>
+              </g>
+
+              <g *ngSwitchCase="'marquise'">
+                <path d="M6 32c9-15 18-22 26-22s17 7 26 22c-9 15-18 22-26 22S15 47 6 32Z"></path>
+                <path d="M6 32h52M32 10v44M16 32l16-22 16 22-16 22Z"></path>
+              </g>
+
+              <g *ngSwitchCase="'baguette'">
+                <path d="M22 8h20l6 8v32l-6 8H22l-6-8V16Z"></path>
+                <path d="M22 8v48M42 8v48M16 16h32M16 48h32M22 16h20v32H22Z"></path>
+              </g>
+
+              <g *ngSwitchDefault>
+                <path d="M32 6 54 20 48 50 32 58 16 50 10 20Z"></path>
+                <path d="M10 20h44M16 50l16-44 16 44M20 20l12 38 12-38M32 6v52"></path>
+              </g>
+            </svg>
 
             <span>
               {{ shape.label }}
@@ -467,7 +577,7 @@
       *ngIf="advancedOpen"
     >
 
-      <section class="search-card nested">
+      <section class="search-card nested inclusion-card">
 
         <div class="section-heading">
 
@@ -553,7 +663,7 @@
 
       </section>
 
-      <section class="search-card nested">
+      <section class="search-card nested measurement-card">
 
         <div class="section-heading">
 
@@ -654,7 +764,7 @@
 
       </section>
 
-      <section class="search-card nested">
+      <section class="search-card nested additional-card">
 
         <div class="section-heading">
 

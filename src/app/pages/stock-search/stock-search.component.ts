@@ -7,9 +7,7 @@ import {
   LucideAngularModule,
   RotateCcw,
   Search,
-  SlidersHorizontal,
-  Sparkles,
-  X
+  SlidersHorizontal
 } from 'lucide-angular';
 
 type OptionGroup =
@@ -67,17 +65,19 @@ export class StockSearchComponent {
 
   readonly SlidersHorizontal = SlidersHorizontal;
 
-  readonly Sparkles = Sparkles;
-
   readonly RotateCcw = RotateCcw;
 
   readonly ChevronDown = ChevronDown;
 
-  readonly X = X;
-
   readonly Gem = Gem;
 
   advancedOpen = false;
+
+  status = 'All';
+
+  unseenOnly = false;
+
+  demandView = 'Search Demand';
 
   size = '';
 
@@ -331,50 +331,6 @@ export class StockSearchComponent {
     return this.selected[group].includes(option);
   }
 
-  get selectedChips(): string[] {
-
-    const optionChips =
-      Object.entries(this.selected)
-        .flatMap(([group, values]) =>
-          values.map(value => `${this.getGroupLabel(group as OptionGroup)}: ${value}`)
-        );
-
-    const rangeChips =
-      Object.entries(this.ranges)
-        .filter(([, value]) => value.from || value.to)
-        .map(([field, value]) =>
-          `${this.getRangeLabel(field as RangeField)}: ${value.from || 'Any'} - ${value.to || 'Any'}`
-        );
-
-    const sizeChip =
-      this.size ? [`Size: ${this.size}`] : [];
-
-    return [
-      ...optionChips,
-      ...rangeChips,
-      ...sizeChip
-    ];
-  }
-
-  removeChip(label: string): void {
-
-    const [
-      groupLabel,
-      value
-    ] = label.split(': ');
-
-    const group =
-      Object.keys(this.selected)
-        .find(key => this.getGroupLabel(key as OptionGroup) === groupLabel) as
-          OptionGroup |
-          undefined;
-
-    if (group && value) {
-      this.selected[group] =
-        this.selected[group].filter(item => item !== value);
-    }
-  }
-
   resetSearch(): void {
 
     Object.keys(this.selected)
@@ -391,51 +347,5 @@ export class StockSearchComponent {
       });
 
     this.size = '';
-  }
-
-  private getGroupLabel(group: OptionGroup): string {
-
-    const labels: Record<OptionGroup, string> = {
-      lab: 'Lab',
-      shape: 'Shape',
-      color: 'Color',
-      clarity: 'Clarity',
-      cps: 'CPS',
-      cut: 'Cut',
-      polish: 'Pol',
-      symmetry: 'Sym',
-      fluor: 'Fluor',
-      shade: 'Shade',
-      black: 'Black',
-      white: 'White',
-      milky: 'Milky',
-      eyeClean: 'Eye Clean',
-      culet: 'Culet',
-      canadamark: 'Canadamark',
-      ha: 'H&A',
-      typeIia: 'Type IIA',
-      location: 'LOC',
-      luster: 'Luster'
-    };
-
-    return labels[group];
-  }
-
-  private getRangeLabel(field: RangeField): string {
-
-    const labels: Record<RangeField, string> = {
-      weight: 'Weight',
-      price: 'PR/CT',
-      discount: 'Dis%',
-      depth: 'Dep%',
-      table: 'Tab%',
-      minMM: 'MinMM',
-      maxMM: 'MaxMM',
-      crown: 'Cr',
-      pavilion: 'Pav',
-      ratio: 'L/W'
-    };
-
-    return labels[field];
   }
 }
