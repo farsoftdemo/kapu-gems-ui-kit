@@ -94,7 +94,7 @@
       <button
         class="menu-item submenu-trigger"
         type="button"
-        (click)="toggleSubmenu('stock', $event)"
+        (click)="openStockSearch($event)"
       >
 
         <lucide-icon
@@ -121,7 +121,7 @@
       >
 
         <a
-          routerLink="/stock-search"
+          [routerLink]="['/stock-search']"
           routerLinkActive="active"
           class="submenu-item"
         >
@@ -129,7 +129,7 @@
         </a>
 
         <a
-          routerLink="/stock-search/fancy"
+          [routerLink]="['/stock-search', 'fancy']"
           routerLinkActive="active"
           class="submenu-item"
         >
@@ -137,7 +137,7 @@
         </a>
 
         <a
-          routerLink="/stock-search/saved"
+          [routerLink]="['/stock-search', 'saved']"
           routerLinkActive="active"
           class="submenu-item"
         >

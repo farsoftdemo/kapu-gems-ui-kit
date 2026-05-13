@@ -39,6 +39,22 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/stock-search/stock-search.component')
           .then(m => m.StockSearchComponent)
+      },
+
+      {
+        path: 'stock-search/fancy',
+
+        loadComponent: () =>
+          import('./pages/stock-search/stock-search.component')
+          .then(m => m.StockSearchComponent)
+      },
+
+      {
+        path: 'stock-search/saved',
+
+        loadComponent: () =>
+          import('./pages/stock-search/stock-search.component')
+          .then(m => m.StockSearchComponent)
       }
 
     ]

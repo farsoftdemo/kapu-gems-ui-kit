@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 
 import {
   RouterLink,
-  RouterLinkActive
+  RouterLinkActive,
+  Router
 } from '@angular/router';
 
 
@@ -47,6 +48,10 @@ import {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  constructor(
+    private router: Router
+  ) {}
+
   @Output()
   collapsedChange =
     new EventEmitter<boolean>();
@@ -112,6 +117,19 @@ export class SidebarComponent {
 
     this.openSubmenus[menu] =
       !this.openSubmenus[menu];
+  }
+
+  openStockSearch(
+    event: Event
+  ): void {
+
+    event.stopPropagation();
+
+    this.openSubmenus['stock'] = true;
+
+    this.closeMobileSidebar();
+
+    this.router.navigate(['/stock-search']);
   }
 
   toggleMobileSidebar(): void {
