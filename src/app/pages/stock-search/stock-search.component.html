@@ -1,0 +1,764 @@
+<section class="stock-search-page">
+
+  <div class="search-hero">
+
+    <div>
+
+      <small>
+        PREMIUM INVENTORY SEARCH
+      </small>
+
+      <h1>
+        Stock Search
+      </h1>
+
+      <p>
+        Find certified diamonds by shape, grading, measurement and commercial preferences.
+      </p>
+
+    </div>
+
+    <div class="hero-actions">
+
+      <button
+        class="secondary-action"
+        type="button"
+        (click)="resetSearch()"
+      >
+        <lucide-icon [img]="RotateCcw">
+        </lucide-icon>
+
+        Reset
+      </button>
+
+      <button
+        class="primary-action"
+        type="button"
+      >
+        <lucide-icon [img]="Search">
+        </lucide-icon>
+
+        Search Stock
+      </button>
+
+    </div>
+
+  </div>
+
+  <section
+    class="selected-panel"
+    *ngIf="selectedChips.length"
+  >
+
+    <div class="selected-title">
+
+      <lucide-icon [img]="Sparkles">
+      </lucide-icon>
+
+      Selected filters
+
+    </div>
+
+    <div class="selected-chips">
+
+      <button
+        *ngFor="let chip of selectedChips"
+        class="selected-chip"
+        type="button"
+        (click)="removeChip(chip)"
+      >
+        {{ chip }}
+
+        <lucide-icon [img]="X">
+        </lucide-icon>
+      </button>
+
+    </div>
+
+  </section>
+
+  <section class="search-card">
+
+    <div class="section-heading">
+
+      <div>
+
+        <small>
+          STEP 01
+        </small>
+
+        <h2>
+          Basic Search Details
+        </h2>
+
+      </div>
+
+      <span>
+        Multi-select tiles
+      </span>
+
+    </div>
+
+    <div class="filter-stack">
+
+      <div class="filter-row compact">
+
+        <label>
+          Lab
+        </label>
+
+        <div class="tile-list">
+
+          <button
+            *ngFor="let lab of labs"
+            class="filter-tile"
+            type="button"
+            [class.selected]="isSelected('lab', lab)"
+            (click)="toggleSelection('lab', lab)"
+          >
+            {{ lab }}
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="filter-row shape-row">
+
+        <label>
+          Shape
+        </label>
+
+        <div class="shape-grid">
+
+          <button
+            *ngFor="let shape of shapes"
+            class="shape-tile"
+            type="button"
+            [class.selected]="isSelected('shape', shape.label)"
+            (click)="toggleSelection('shape', shape.label)"
+          >
+            <span
+              class="shape-mark"
+              [ngClass]="shape.iconClass"
+            >
+            </span>
+
+            <span>
+              {{ shape.label }}
+            </span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="two-column-row">
+
+        <div class="filter-row">
+
+          <label>
+            Weight
+          </label>
+
+          <div class="range-pair">
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.weight.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.weight.to"
+            >
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Size
+          </label>
+
+          <select [(ngModel)]="size">
+            <option value="">Any size range</option>
+            <option value="0.30 - 0.49">0.30 - 0.49</option>
+            <option value="0.50 - 0.99">0.50 - 0.99</option>
+            <option value="1.00 - 1.49">1.00 - 1.49</option>
+            <option value="1.50 - 1.99">1.50 - 1.99</option>
+            <option value="2.00+">2.00+</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="filter-row">
+
+        <label>
+          Color
+        </label>
+
+        <div class="tile-list">
+
+          <button
+            *ngFor="let color of colorOptions"
+            class="filter-tile"
+            type="button"
+            [class.selected]="isSelected('color', color)"
+            (click)="toggleSelection('color', color)"
+          >
+            {{ color }}
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="filter-row">
+
+        <label>
+          Clarity
+        </label>
+
+        <div class="tile-list">
+
+          <button
+            *ngFor="let clarity of clarityOptions"
+            class="filter-tile"
+            type="button"
+            [class.selected]="isSelected('clarity', clarity)"
+            (click)="toggleSelection('clarity', clarity)"
+          >
+            {{ clarity }}
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="four-column-row">
+
+        <div class="filter-row">
+
+          <label>
+            CPS
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let cps of cpsOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('cps', cps)"
+              (click)="toggleSelection('cps', cps)"
+            >
+              {{ cps }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Cut
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let cut of cutOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('cut', cut)"
+              (click)="toggleSelection('cut', cut)"
+            >
+              {{ cut }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Pol
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let polish of cutOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('polish', polish)"
+              (click)="toggleSelection('polish', polish)"
+            >
+              {{ polish }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Sym
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let symmetry of cutOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('symmetry', symmetry)"
+              (click)="toggleSelection('symmetry', symmetry)"
+            >
+              {{ symmetry }}
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="two-column-row">
+
+        <div class="filter-row">
+
+          <label>
+            Fluor
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let fluor of fluorOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('fluor', fluor)"
+              (click)="toggleSelection('fluor', fluor)"
+            >
+              {{ fluor }}
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Shade
+          </label>
+
+          <div class="tile-list">
+
+            <button
+              *ngFor="let shade of shadeOptions"
+              class="filter-tile"
+              type="button"
+              [class.selected]="isSelected('shade', shade)"
+              (click)="toggleSelection('shade', shade)"
+            >
+              {{ shade }}
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="two-column-row">
+
+        <div class="filter-row">
+
+          <label>
+            PR/CT
+          </label>
+
+          <div class="range-pair">
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.price.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.price.to"
+            >
+
+          </div>
+
+        </div>
+
+        <div class="filter-row">
+
+          <label>
+            Dis%
+          </label>
+
+          <div class="range-pair">
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.discount.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.discount.to"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="advanced-shell">
+
+    <button
+      class="advanced-toggle"
+      type="button"
+      [class.open]="advancedOpen"
+      (click)="advancedOpen = !advancedOpen"
+    >
+
+      <span>
+        <lucide-icon [img]="SlidersHorizontal">
+        </lucide-icon>
+
+        Advanced Search
+      </span>
+
+      <lucide-icon
+        class="advanced-chevron"
+        [img]="ChevronDown"
+      >
+      </lucide-icon>
+
+    </button>
+
+    <div
+      class="advanced-content"
+      *ngIf="advancedOpen"
+    >
+
+      <section class="search-card nested">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              ADVANCED
+            </small>
+
+            <h2>
+              Inclusion Details
+            </h2>
+
+          </div>
+
+        </div>
+
+        <div class="filter-stack">
+
+          <div class="filter-row">
+            <label>Black</label>
+            <div class="tile-list">
+              <button
+                *ngFor="let option of blackOptions"
+                class="filter-tile"
+                type="button"
+                [class.selected]="isSelected('black', option)"
+                (click)="toggleSelection('black', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label>White</label>
+            <div class="tile-list">
+              <button
+                *ngFor="let option of whiteOptions"
+                class="filter-tile"
+                type="button"
+                [class.selected]="isSelected('white', option)"
+                (click)="toggleSelection('white', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+
+          <div class="two-column-row">
+            <div class="filter-row">
+              <label>Milky</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of milkyOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('milky', option)"
+                  (click)="toggleSelection('milky', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>Eye Clean</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of eyeCleanOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('eyeClean', option)"
+                  (click)="toggleSelection('eyeClean', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="search-card nested">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              ADVANCED
+            </small>
+
+            <h2>
+              Measurement Details
+            </h2>
+
+          </div>
+
+        </div>
+
+        <div class="filter-stack">
+
+          <div class="two-column-row">
+            <div class="filter-row">
+              <label>Dep%</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.depth.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.depth.to">
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>Tab%</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.table.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.table.to">
+              </div>
+            </div>
+          </div>
+
+          <div class="two-column-row">
+            <div class="filter-row">
+              <label>MinMM</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.minMM.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.minMM.to">
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>MaxMM</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.maxMM.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.maxMM.to">
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label>Culet</label>
+            <div class="tile-list">
+              <button
+                *ngFor="let option of culetOptions"
+                class="filter-tile"
+                type="button"
+                [class.selected]="isSelected('culet', option)"
+                (click)="toggleSelection('culet', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+
+          <div class="three-column-row">
+            <div class="filter-row">
+              <label>Cr &gt;</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.crown.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.crown.to">
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>Pav &gt;</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.pavilion.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.pavilion.to">
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>L/W</label>
+              <div class="range-pair">
+                <input type="text" placeholder="From" [(ngModel)]="ranges.ratio.from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges.ratio.to">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="search-card nested">
+
+        <div class="section-heading">
+
+          <div>
+
+            <small>
+              ADVANCED
+            </small>
+
+            <h2>
+              Additional Details
+            </h2>
+
+          </div>
+
+        </div>
+
+        <div class="filter-stack">
+
+          <div class="two-column-row">
+            <div class="filter-row">
+              <label>CANADAMARK</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of canadamarkOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('canadamark', option)"
+                  (click)="toggleSelection('canadamark', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>LOC</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of locationOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('location', option)"
+                  (click)="toggleSelection('location', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-column-row">
+            <div class="filter-row">
+              <label>H &amp; A</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of haOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('ha', option)"
+                  (click)="toggleSelection('ha', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label>Luster</label>
+              <div class="tile-list">
+                <button
+                  *ngFor="let option of lusterOptions"
+                  class="filter-tile"
+                  type="button"
+                  [class.selected]="isSelected('luster', option)"
+                  (click)="toggleSelection('luster', option)"
+                >
+                  {{ option }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label>TYPE IIA</label>
+            <div class="tile-list">
+              <button
+                *ngFor="let option of typeIiaOptions"
+                class="filter-tile"
+                type="button"
+                [class.selected]="isSelected('typeIia', option)"
+                (click)="toggleSelection('typeIia', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </section>
+
+</section>

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import {
   LucideAngularModule,
@@ -100,6 +101,7 @@ type NoticeAd = {
 
   imports: [
     CommonModule,
+    RouterLink,
     LucideAngularModule,
     NgApexchartsModule,
     PremiumModalComponent

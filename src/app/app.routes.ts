@@ -31,6 +31,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component')
           .then(m => m.DashboardComponent)
+      },
+
+      {
+        path: 'stock-search',
+
+        loadComponent: () =>
+          import('./pages/stock-search/stock-search.component')
+          .then(m => m.StockSearchComponent)
       }
 
     ]

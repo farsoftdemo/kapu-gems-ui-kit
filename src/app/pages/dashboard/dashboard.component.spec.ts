@@ -3,6 +3,7 @@ import {
   Input
 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { DashboardComponent } from './dashboard.component';
@@ -40,7 +41,8 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent]
+      imports: [DashboardComponent],
+      providers: [provideRouter([])]
     })
     .overrideComponent(DashboardComponent, {
       remove: {
