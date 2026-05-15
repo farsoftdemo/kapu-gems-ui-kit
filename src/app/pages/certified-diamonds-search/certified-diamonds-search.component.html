@@ -28,7 +28,7 @@
 
       <div class="shape-filter-grid">
         <button
-          *ngFor="let shape of shapes.slice(0, 6)"
+          *ngFor="let shape of shapes"
           class="shape-filter"
           type="button"
           [class.selected]="isSelected('shape', shape.label)"
@@ -66,7 +66,7 @@
 
     <div class="filter-group">
       <div class="filter-title">
-        Carat
+        Weight
       </div>
 
       <div class="range-pair">
@@ -82,6 +82,24 @@
           [(ngModel)]="ranges.weight.to"
         >
       </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-title">
+        Size
+      </div>
+
+      <select
+        class="full-select"
+        [(ngModel)]="size"
+      >
+        <option value="">Any size range</option>
+        <option value="0.30 - 0.49">0.30 - 0.49</option>
+        <option value="0.50 - 0.99">0.50 - 0.99</option>
+        <option value="1.00 - 1.49">1.00 - 1.49</option>
+        <option value="1.50 - 1.99">1.50 - 1.99</option>
+        <option value="2.00+">2.00+</option>
+      </select>
     </div>
 
     <div class="filter-group">
@@ -122,16 +140,108 @@
 
     <div class="filter-group">
       <div class="filter-title">
-        Cut
+        CPS
       </div>
 
       <div class="chip-row">
         <button
-          *ngFor="let option of cutOptions"
+          *ngFor="let option of cpsOptions"
           class="filter-chip wide"
           type="button"
-          [class.selected]="isSelected('cut', option)"
-          (click)="toggleSelection('cut', option)"
+          [class.selected]="isSelected('cps', option)"
+          (click)="toggleSelection('cps', option)"
+        >
+          {{ option }}
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-group quality-basic">
+      <div>
+        <div class="filter-title">
+          Cut
+        </div>
+
+        <div class="chip-row">
+          <button
+            *ngFor="let option of cutOptions"
+            class="filter-chip"
+            type="button"
+            [class.selected]="isSelected('cut', option)"
+            (click)="toggleSelection('cut', option)"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="filter-title">
+          Pol
+        </div>
+
+        <div class="chip-row">
+          <button
+            *ngFor="let option of cutOptions"
+            class="filter-chip"
+            type="button"
+            [class.selected]="isSelected('polish', option)"
+            (click)="toggleSelection('polish', option)"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="filter-title">
+          Sym
+        </div>
+
+        <div class="chip-row">
+          <button
+            *ngFor="let option of cutOptions"
+            class="filter-chip"
+            type="button"
+            [class.selected]="isSelected('symmetry', option)"
+            (click)="toggleSelection('symmetry', option)"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-title">
+        Fluor
+      </div>
+
+      <div class="chip-row">
+        <button
+          *ngFor="let option of fluorOptions"
+          class="filter-chip"
+          type="button"
+          [class.selected]="isSelected('fluor', option)"
+          (click)="toggleSelection('fluor', option)"
+        >
+          {{ option }}
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-title">
+        Shade
+      </div>
+
+      <div class="chip-row">
+        <button
+          *ngFor="let option of shadeOptions"
+          class="filter-chip"
+          type="button"
+          [class.selected]="isSelected('shade', option)"
+          (click)="toggleSelection('shade', option)"
         >
           {{ option }}
         </button>
@@ -158,6 +268,26 @@
       </div>
     </div>
 
+    <div class="filter-group">
+      <div class="filter-title">
+        Dis%
+      </div>
+
+      <div class="range-pair">
+        <input
+          type="text"
+          placeholder="From"
+          [(ngModel)]="ranges.discount.from"
+        >
+
+        <input
+          type="text"
+          placeholder="To"
+          [(ngModel)]="ranges.discount.to"
+        >
+      </div>
+    </div>
+
     <button
       class="more-filters"
       type="button"
@@ -175,6 +305,84 @@
 
   <main class="result-market">
 
+    <section class="stock-action-bar">
+      <div class="status-pills">
+        <span>
+          Status
+        </span>
+
+        <button
+          type="button"
+          [class.active]="status === 'All'"
+          (click)="status = 'All'"
+        >
+          All
+        </button>
+
+        <button
+          type="button"
+          [class.active]="status === 'New Arrival'"
+          (click)="status = 'New Arrival'"
+        >
+          New Arrival
+        </button>
+      </div>
+
+      <label class="unseen-toggle">
+        <input
+          type="checkbox"
+          [(ngModel)]="unseenOnly"
+        >
+
+        Unseen
+      </label>
+
+      <label class="demand-control">
+        <span>
+          Demand
+        </span>
+
+        <select [(ngModel)]="demandView">
+          <option value="Search Demand">Search Demand</option>
+          <option value="My Demand">My Demand</option>
+          <option value="Shared Demand">Shared Demand</option>
+        </select>
+      </label>
+
+      <div class="stock-actions">
+        <button
+          class="quiet-action"
+          type="button"
+          (click)="resetSearch()"
+        >
+          <lucide-icon [img]="RotateCcw">
+          </lucide-icon>
+
+          Reset
+        </button>
+
+        <button
+          class="primary-action"
+          type="button"
+        >
+          <lucide-icon [img]="Search">
+          </lucide-icon>
+
+          Search
+        </button>
+
+        <button
+          class="demand-action"
+          type="button"
+        >
+          <lucide-icon [img]="Save">
+          </lucide-icon>
+
+          Save Demand
+        </button>
+      </div>
+    </section>
+
     <header class="result-toolbar">
 
       <div>
@@ -188,26 +396,6 @@
       </div>
 
       <div class="toolbar-actions">
-        <label class="status-select">
-          <span>
-            Status
-          </span>
-
-          <select [(ngModel)]="status">
-            <option value="All">All</option>
-            <option value="New Arrival">New Arrival</option>
-          </select>
-        </label>
-
-        <label class="unseen-toggle">
-          <input
-            type="checkbox"
-            [(ngModel)]="unseenOnly"
-          >
-
-          Unseen
-        </label>
-
         <label class="sort-control">
           <span>
             Sort By
