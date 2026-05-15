@@ -1,549 +1,509 @@
 <section class="certified-search-page">
 
-  <div class="search-atelier">
+  <header class="search-header">
 
-    <aside class="atelier-rail">
-
-      <div class="rail-mark">
-        <lucide-icon [img]="Gem">
+    <div class="title-block">
+      <div class="title-icon">
+        <lucide-icon [img]="ShieldCheck">
         </lucide-icon>
       </div>
 
-      <small>
-        CERTIFIED COLLECTION
-      </small>
+      <div>
+        <small>
+          CERTIFIED INVENTORY
+        </small>
 
-      <h1>
-        Diamond Atelier
-      </h1>
+        <h1>
+          Certified Diamonds
+        </h1>
 
-      <p>
-        A private-grade search desk for certified stones, shaped around lab, make, price and precision details.
-      </p>
+        <p>
+          Refined search controls for certified stock, demand lists, proportions, inclusions and client-ready grading filters.
+        </p>
+      </div>
+    </div>
 
-      <div class="rail-metrics">
-        <div>
-          <strong>
-            14
-          </strong>
+    <div class="header-actions">
+      <button
+        class="quiet-action"
+        type="button"
+        (click)="resetSearch()"
+      >
+        <lucide-icon [img]="RotateCcw">
+        </lucide-icon>
+
+        Reset
+      </button>
+
+      <button
+        class="primary-action"
+        type="button"
+      >
+        <lucide-icon [img]="Search">
+        </lucide-icon>
+
+        Search Stock
+      </button>
+
+      <button
+        class="demand-action"
+        type="button"
+      >
+        <lucide-icon [img]="Save">
+        </lucide-icon>
+
+        Save Demand
+      </button>
+    </div>
+
+  </header>
+
+  <section class="control-band">
+
+    <div class="status-switch">
+      <span>
+        Status
+      </span>
+
+      <button
+        type="button"
+        [class.active]="status === 'All'"
+        (click)="status = 'All'"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        [class.active]="status === 'New Arrival'"
+        (click)="status = 'New Arrival'"
+      >
+        New Arrival
+      </button>
+    </div>
+
+    <label class="unseen-check">
+      <input
+        type="checkbox"
+        [(ngModel)]="unseenOnly"
+      >
+
+      Unseen only
+    </label>
+
+    <label class="demand-select">
+      <span>
+        Demand
+      </span>
+
+      <select [(ngModel)]="demandView">
+        <option value="Search Demand">Search Demand</option>
+        <option value="My Demand">My Demand</option>
+        <option value="Shared Demand">Shared Demand</option>
+      </select>
+    </label>
+
+  </section>
+
+  <section class="search-card">
+
+    <div class="section-header">
+      <div>
+        <small>
+          BASIC SEARCH
+        </small>
+
+        <h2>
+          Certificate, shape and commercial range
+        </h2>
+      </div>
+
+      <span>
+        Multi-select enabled
+      </span>
+    </div>
+
+    <div class="search-row">
+      <label>
+        Lab
+      </label>
+
+      <div class="chip-line">
+        <button
+          *ngFor="let lab of labs"
+          class="cert-chip lab"
+          type="button"
+          [class.selected]="isSelected('lab', lab)"
+          (click)="toggleSelection('lab', lab)"
+        >
+          <lucide-icon [img]="BadgeCheck">
+          </lucide-icon>
+
+          {{ lab }}
+        </button>
+      </div>
+    </div>
+
+    <div class="search-row shape-row">
+      <label>
+        Shape
+      </label>
+
+      <div class="shape-matrix">
+        <button
+          *ngFor="let shape of shapes"
+          class="shape-option"
+          type="button"
+          [class.selected]="isSelected('shape', shape.label)"
+          (click)="toggleSelection('shape', shape.label)"
+        >
+          <span
+            class="shape-icon"
+            [ngClass]="shape.iconClass"
+          >
+            <i></i>
+          </span>
 
           <span>
-            Shapes
+            {{ shape.label }}
           </span>
-        </div>
+        </button>
+      </div>
+    </div>
 
-        <div>
-          <strong>
-            4
-          </strong>
+    <div class="field-grid">
+      <label class="range-control">
+        <span>
+          Weight
+        </span>
 
-          <span>
-            Labs
-          </span>
-        </div>
+        <input
+          type="text"
+          placeholder="From"
+          [(ngModel)]="ranges.weight.from"
+        >
 
-        <div>
-          <strong>
-            72h
-          </strong>
+        <input
+          type="text"
+          placeholder="To"
+          [(ngModel)]="ranges.weight.to"
+        >
+      </label>
 
-          <span>
-            Demand hold
-          </span>
+      <label class="select-control">
+        <span>
+          Size
+        </span>
+
+        <select [(ngModel)]="size">
+          <option value="">Any size range</option>
+          <option value="0.30 - 0.49">0.30 - 0.49</option>
+          <option value="0.50 - 0.99">0.50 - 0.99</option>
+          <option value="1.00 - 1.49">1.00 - 1.49</option>
+          <option value="1.50 - 1.99">1.50 - 1.99</option>
+          <option value="2.00+">2.00+</option>
+        </select>
+      </label>
+
+      <label class="range-control">
+        <span>
+          PR/CT
+        </span>
+
+        <input
+          type="text"
+          placeholder="From"
+          [(ngModel)]="ranges.price.from"
+        >
+
+        <input
+          type="text"
+          placeholder="To"
+          [(ngModel)]="ranges.price.to"
+        >
+      </label>
+
+      <label class="range-control">
+        <span>
+          Dis%
+        </span>
+
+        <input
+          type="text"
+          placeholder="From"
+          [(ngModel)]="ranges.discount.from"
+        >
+
+        <input
+          type="text"
+          placeholder="To"
+          [(ngModel)]="ranges.discount.to"
+        >
+      </label>
+    </div>
+
+  </section>
+
+  <section class="search-card">
+
+    <div class="section-header">
+      <div>
+        <small>
+          MAKE DETAILS
+        </small>
+
+        <h2>
+          Color, clarity, finish and fluorescence
+        </h2>
+      </div>
+    </div>
+
+    <div class="search-row">
+      <label>
+        Color
+      </label>
+
+      <div class="chip-line">
+        <button
+          *ngFor="let option of colorOptions"
+          class="cert-chip"
+          type="button"
+          [class.selected]="isSelected('color', option)"
+          (click)="toggleSelection('color', option)"
+        >
+          {{ option }}
+        </button>
+      </div>
+    </div>
+
+    <div class="search-row">
+      <label>
+        Clarity
+      </label>
+
+      <div class="chip-line">
+        <button
+          *ngFor="let option of clarityOptions"
+          class="cert-chip"
+          type="button"
+          [class.selected]="isSelected('clarity', option)"
+          (click)="toggleSelection('clarity', option)"
+        >
+          {{ option }}
+        </button>
+      </div>
+    </div>
+
+    <div class="quality-layout">
+      <div
+        class="mini-group"
+        *ngFor="let group of qualityGroups"
+      >
+        <label>
+          {{ group.label }}
+        </label>
+
+        <div class="chip-line compact">
+          <button
+            *ngFor="let option of group.options"
+            class="cert-chip"
+            type="button"
+            [class.selected]="isSelected(group.key, option)"
+            (click)="toggleSelection(group.key, option)"
+          >
+            {{ option }}
+          </button>
         </div>
       </div>
 
-    </aside>
-
-    <main class="atelier-workspace">
-
-      <header class="workspace-header">
-
-        <div>
-          <small>
-            PREMIUM STOCK SEARCH
-          </small>
-
-          <h2>
-            Certified Diamonds
-          </h2>
-        </div>
-
-        <div class="workspace-actions">
-          <button
-            class="ghost-action"
-            type="button"
-            (click)="resetSearch()"
-          >
-            <lucide-icon [img]="RotateCcw">
-            </lucide-icon>
-
-            Reset
-          </button>
-
-          <button
-            class="solid-action"
-            type="button"
-          >
-            <lucide-icon [img]="Search">
-            </lucide-icon>
-
-            Search
-          </button>
-
-          <button
-            class="save-action"
-            type="button"
-          >
-            <lucide-icon [img]="Save">
-            </lucide-icon>
-
-            Save Demand
-          </button>
-        </div>
-
-      </header>
-
-      <section class="preference-strip">
-
-        <div class="segmented-control">
-          <span>
-            Status
-          </span>
-
-          <button
-            type="button"
-            [class.active]="status === 'All'"
-            (click)="status = 'All'"
-          >
-            All
-          </button>
-
-          <button
-            type="button"
-            [class.active]="status === 'New Arrival'"
-            (click)="status = 'New Arrival'"
-          >
-            New Arrival
-          </button>
-        </div>
-
-        <label class="unseen-toggle">
-          <input
-            type="checkbox"
-            [(ngModel)]="unseenOnly"
-          >
-
-          <span>
-            Unseen only
-          </span>
+      <div class="mini-group wide">
+        <label>
+          Fluor
         </label>
 
-        <select
-          class="demand-select"
-          [(ngModel)]="demandView"
-        >
-          <option value="Search Demand">Search Demand</option>
-          <option value="My Demand">My Demand</option>
-          <option value="Shared Demand">Shared Demand</option>
-        </select>
-
-      </section>
-
-      <section class="filter-panel hero-panel">
-
-        <div class="panel-title">
-          <span>
-            01
-          </span>
-
-          <div>
-            <small>
-              FOUNDATION
-            </small>
-
-            <h3>
-              Lab, shape and commercial range
-            </h3>
-          </div>
-        </div>
-
-        <div class="lab-row">
+        <div class="chip-line compact">
           <button
-            *ngFor="let lab of labs"
-            class="lab-chip"
+            *ngFor="let option of fluorOptions"
+            class="cert-chip"
             type="button"
-            [class.selected]="isSelected('lab', lab)"
-            (click)="toggleSelection('lab', lab)"
+            [class.selected]="isSelected('fluor', option)"
+            (click)="toggleSelection('fluor', option)"
           >
-            <lucide-icon [img]="BadgeCheck">
-            </lucide-icon>
-
-            {{ lab }}
+            {{ option }}
           </button>
         </div>
+      </div>
 
-        <div class="shape-gallery">
+      <div class="mini-group wide">
+        <label>
+          Shade
+        </label>
+
+        <div class="chip-line compact">
           <button
-            *ngFor="let shape of shapes"
-            class="shape-card"
+            *ngFor="let option of shadeOptions"
+            class="cert-chip"
             type="button"
-            [class.selected]="isSelected('shape', shape.label)"
-            (click)="toggleSelection('shape', shape.label)"
+            [class.selected]="isSelected('shade', option)"
+            (click)="toggleSelection('shade', option)"
           >
-            <span
-              class="shape-jewel"
-              [ngClass]="shape.iconClass"
-            >
-              <span></span>
-            </span>
-
-            <span>
-              {{ shape.label }}
-            </span>
+            {{ option }}
           </button>
         </div>
+      </div>
+    </div>
 
-        <div class="range-grid">
-          <label class="range-field">
-            <span>
-              Weight
-            </span>
+  </section>
 
-            <input
-              type="text"
-              placeholder="From"
-              [(ngModel)]="ranges.weight.from"
-            >
+  <section class="advanced-wrap">
 
-            <input
-              type="text"
-              placeholder="To"
-              [(ngModel)]="ranges.weight.to"
-            >
-          </label>
+    <button
+      class="advanced-toggle"
+      type="button"
+      [class.open]="advancedOpen"
+      (click)="advancedOpen = !advancedOpen"
+    >
+      <span>
+        <lucide-icon [img]="SlidersHorizontal">
+        </lucide-icon>
 
-          <label class="select-field">
-            <span>
-              Size
-            </span>
+        Advanced Search
+      </span>
 
-            <select [(ngModel)]="size">
-              <option value="">Any size range</option>
-              <option value="0.30 - 0.49">0.30 - 0.49</option>
-              <option value="0.50 - 0.99">0.50 - 0.99</option>
-              <option value="1.00 - 1.49">1.00 - 1.49</option>
-              <option value="1.50 - 1.99">1.50 - 1.99</option>
-              <option value="2.00+">2.00+</option>
-            </select>
-          </label>
+      <lucide-icon [img]="ChevronDown">
+      </lucide-icon>
+    </button>
 
-          <label class="range-field">
-            <span>
-              PR/CT
-            </span>
+    <div
+      class="advanced-panels"
+      *ngIf="advancedOpen"
+    >
 
-            <input
-              type="text"
-              placeholder="From"
-              [(ngModel)]="ranges.price.from"
-            >
-
-            <input
-              type="text"
-              placeholder="To"
-              [(ngModel)]="ranges.price.to"
-            >
-          </label>
-
-          <label class="range-field">
-            <span>
-              Dis%
-            </span>
-
-            <input
-              type="text"
-              placeholder="From"
-              [(ngModel)]="ranges.discount.from"
-            >
-
-            <input
-              type="text"
-              placeholder="To"
-              [(ngModel)]="ranges.discount.to"
-            >
-          </label>
-        </div>
-
-      </section>
-
-      <section class="filter-panel">
-
-        <div class="panel-title">
-          <span>
-            02
-          </span>
-
+      <article class="search-card advanced-card">
+        <div class="section-header compact">
           <div>
             <small>
-              MAKE
+              ADDITIONAL DETAILS
             </small>
 
-            <h3>
-              Color, clarity and finish
-            </h3>
+            <h2>
+              Origin, program and luster
+            </h2>
           </div>
         </div>
 
-        <div class="option-block">
-          <label>
-            Color
-          </label>
-
-          <div class="token-grid">
-            <button
-              *ngFor="let option of colorOptions"
-              class="lux-token"
-              type="button"
-              [class.selected]="isSelected('color', option)"
-              (click)="toggleSelection('color', option)"
-            >
-              {{ option }}
-            </button>
+        <div class="search-row tight">
+          <label>CANADAMARK</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of canadamarkOptions" class="cert-chip" type="button" [class.selected]="isSelected('canadamark', option)" (click)="toggleSelection('canadamark', option)">{{ option }}</button>
           </div>
         </div>
 
-        <div class="option-block">
-          <label>
-            Clarity
-          </label>
-
-          <div class="token-grid">
-            <button
-              *ngFor="let option of clarityOptions"
-              class="lux-token"
-              type="button"
-              [class.selected]="isSelected('clarity', option)"
-              (click)="toggleSelection('clarity', option)"
-            >
-              {{ option }}
-            </button>
+        <div class="search-row tight">
+          <label>LOC</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of locationOptions" class="cert-chip" type="button" [class.selected]="isSelected('location', option)" (click)="toggleSelection('location', option)">{{ option }}</button>
           </div>
         </div>
 
-        <div class="quality-grid">
-          <div
-            class="option-block mini"
-            *ngFor="let group of qualityGroups"
+        <div class="search-row tight">
+          <label>H &amp; A</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of haOptions" class="cert-chip" type="button" [class.selected]="isSelected('ha', option)" (click)="toggleSelection('ha', option)">{{ option }}</button>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>Luster</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of lusterOptions" class="cert-chip" type="button" [class.selected]="isSelected('luster', option)" (click)="toggleSelection('luster', option)">{{ option }}</button>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>TYPE IIA</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of typeIiaOptions" class="cert-chip" type="button" [class.selected]="isSelected('typeIia', option)" (click)="toggleSelection('typeIia', option)">{{ option }}</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="search-card advanced-card">
+        <div class="section-header compact">
+          <div>
+            <small>
+              INCLUSION DETAILS
+            </small>
+
+            <h2>
+              Black, white and eye-clean grading
+            </h2>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>Black</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of blackOptions" class="cert-chip" type="button" [class.selected]="isSelected('black', option)" (click)="toggleSelection('black', option)">{{ option }}</button>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>White</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of whiteOptions" class="cert-chip" type="button" [class.selected]="isSelected('white', option)" (click)="toggleSelection('white', option)">{{ option }}</button>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>Milky</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of milkyOptions" class="cert-chip" type="button" [class.selected]="isSelected('milky', option)" (click)="toggleSelection('milky', option)">{{ option }}</button>
+          </div>
+        </div>
+
+        <div class="search-row tight">
+          <label>Eye Clean</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of eyeCleanOptions" class="cert-chip" type="button" [class.selected]="isSelected('eyeClean', option)" (click)="toggleSelection('eyeClean', option)">{{ option }}</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="search-card advanced-card measure-card">
+        <div class="section-header compact">
+          <div>
+            <small>
+              MEASUREMENT DETAILS
+            </small>
+
+            <h2>
+              Proportions and culet
+            </h2>
+          </div>
+        </div>
+
+        <div class="measure-grid">
+          <label
+            class="range-control"
+            *ngFor="let item of measurementFields"
           >
-            <label>
-              {{ group.label }}
-            </label>
-
-            <div class="token-grid compact">
-              <button
-                *ngFor="let option of group.options"
-                class="lux-token"
-                type="button"
-                [class.selected]="isSelected(group.key, option)"
-                (click)="toggleSelection(group.key, option)"
-              >
-                {{ option }}
-              </button>
-            </div>
-          </div>
+            <span>{{ item.label }}</span>
+            <input type="text" placeholder="From" [(ngModel)]="ranges[item.key].from">
+            <input type="text" placeholder="To" [(ngModel)]="ranges[item.key].to">
+          </label>
         </div>
 
-        <div class="quality-grid two">
-          <div class="option-block mini">
-            <label>
-              Fluor
-            </label>
-
-            <div class="token-grid compact">
-              <button
-                *ngFor="let option of fluorOptions"
-                class="lux-token"
-                type="button"
-                [class.selected]="isSelected('fluor', option)"
-                (click)="toggleSelection('fluor', option)"
-              >
-                {{ option }}
-              </button>
-            </div>
-          </div>
-
-          <div class="option-block mini">
-            <label>
-              Shade
-            </label>
-
-            <div class="token-grid compact">
-              <button
-                *ngFor="let option of shadeOptions"
-                class="lux-token"
-                type="button"
-                [class.selected]="isSelected('shade', option)"
-                (click)="toggleSelection('shade', option)"
-              >
-                {{ option }}
-              </button>
-            </div>
+        <div class="search-row tight culet-row">
+          <label>Culet</label>
+          <div class="chip-line compact">
+            <button *ngFor="let option of culetOptions" class="cert-chip" type="button" [class.selected]="isSelected('culet', option)" (click)="toggleSelection('culet', option)">{{ option }}</button>
           </div>
         </div>
+      </article>
 
-      </section>
+    </div>
 
-      <section class="advanced-suite">
-
-        <button
-          class="advanced-head"
-          type="button"
-          [class.open]="advancedOpen"
-          (click)="advancedOpen = !advancedOpen"
-        >
-          <span>
-            <lucide-icon [img]="SlidersHorizontal">
-            </lucide-icon>
-
-            Advanced certificate controls
-          </span>
-
-          <lucide-icon [img]="ChevronDown">
-          </lucide-icon>
-        </button>
-
-        <div
-          class="advanced-grid"
-          *ngIf="advancedOpen"
-        >
-
-          <article class="filter-panel compact-panel">
-            <div class="panel-title small">
-              <span>
-                A
-              </span>
-
-              <div>
-                <small>ADDITIONAL</small>
-                <h3>Origin and programs</h3>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>CANADAMARK</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of canadamarkOptions" class="lux-token" type="button" [class.selected]="isSelected('canadamark', option)" (click)="toggleSelection('canadamark', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>LOC</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of locationOptions" class="lux-token" type="button" [class.selected]="isSelected('location', option)" (click)="toggleSelection('location', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>H &amp; A</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of haOptions" class="lux-token" type="button" [class.selected]="isSelected('ha', option)" (click)="toggleSelection('ha', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>Luster</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of lusterOptions" class="lux-token" type="button" [class.selected]="isSelected('luster', option)" (click)="toggleSelection('luster', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>TYPE IIA</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of typeIiaOptions" class="lux-token" type="button" [class.selected]="isSelected('typeIia', option)" (click)="toggleSelection('typeIia', option)">{{ option }}</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="filter-panel compact-panel">
-            <div class="panel-title small">
-              <span>
-                B
-              </span>
-
-              <div>
-                <small>INCLUSIONS</small>
-                <h3>Black, white and clean eye</h3>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>Black</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of blackOptions" class="lux-token" type="button" [class.selected]="isSelected('black', option)" (click)="toggleSelection('black', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>White</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of whiteOptions" class="lux-token" type="button" [class.selected]="isSelected('white', option)" (click)="toggleSelection('white', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>Milky</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of milkyOptions" class="lux-token" type="button" [class.selected]="isSelected('milky', option)" (click)="toggleSelection('milky', option)">{{ option }}</button>
-              </div>
-            </div>
-
-            <div class="option-block mini">
-              <label>Eye Clean</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of eyeCleanOptions" class="lux-token" type="button" [class.selected]="isSelected('eyeClean', option)" (click)="toggleSelection('eyeClean', option)">{{ option }}</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="filter-panel compact-panel measure-panel">
-            <div class="panel-title small">
-              <span>
-                C
-              </span>
-
-              <div>
-                <small>MEASUREMENTS</small>
-                <h3>Depth, table and proportions</h3>
-              </div>
-            </div>
-
-            <div class="measure-grid">
-              <label
-                class="range-field"
-                *ngFor="let item of measurementFields"
-              >
-                <span>{{ item.label }}</span>
-                <input type="text" placeholder="From" [(ngModel)]="ranges[item.key].from">
-                <input type="text" placeholder="To" [(ngModel)]="ranges[item.key].to">
-              </label>
-            </div>
-
-            <div class="option-block mini">
-              <label>Culet</label>
-              <div class="token-grid compact">
-                <button *ngFor="let option of culetOptions" class="lux-token" type="button" [class.selected]="isSelected('culet', option)" (click)="toggleSelection('culet', option)">{{ option }}</button>
-              </div>
-            </div>
-          </article>
-
-        </div>
-
-      </section>
-
-    </main>
-
-  </div>
+  </section>
 
 </section>
