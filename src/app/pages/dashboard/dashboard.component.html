@@ -4,6 +4,73 @@
 >
 </app-premium-modal>
 
+<div
+  class="info-modal-backdrop"
+  *ngIf="showEarlyBirdInfo"
+  (click)="closeEarlyBirdInfo()"
+>
+
+  <section
+    class="info-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="earlyBirdInfoTitle"
+    (click)="$event.stopPropagation()"
+  >
+
+    <button
+      class="info-modal-close"
+      type="button"
+      aria-label="Close Early Bird information"
+      (click)="closeEarlyBirdInfo()"
+    >
+      <lucide-icon [img]="X">
+      </lucide-icon>
+    </button>
+
+    <div class="info-modal-icon">
+      <lucide-icon [img]="Gavel">
+      </lucide-icon>
+    </div>
+
+    <small>
+      LIVE BIDDING ACCESS
+    </small>
+
+    <h2 id="earlyBirdInfoTitle">
+      Early Bird
+    </h2>
+
+    <p>
+      Early Bird gives selected clients priority access to bid on premium stones before the wider inventory opens.
+    </p>
+
+    <div class="info-modal-points">
+      <span>
+        Priority viewing
+      </span>
+
+      <span>
+        Bid shortlist
+      </span>
+
+      <span>
+        My bid tracking
+      </span>
+    </div>
+
+    <button
+      class="info-modal-action"
+      type="button"
+      (click)="closeEarlyBirdInfo()"
+    >
+      Got it
+    </button>
+
+  </section>
+
+</div>
+
 <!-- STATS -->
 
 <!-- STATS -->
@@ -320,21 +387,6 @@
         <lucide-icon [img]="ChevronRight">
         </lucide-icon>
       </button>
-
-    </div>
-
-    <div
-      class="earlybird-info-popover"
-      *ngIf="showEarlyBirdInfo"
-    >
-
-      <strong>
-        Early Bird
-      </strong>
-
-      <p>
-        Priority bidding access for selected stones before the wider inventory opens.
-      </p>
 
     </div>
 

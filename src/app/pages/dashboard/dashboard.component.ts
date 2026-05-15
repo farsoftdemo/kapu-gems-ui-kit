@@ -26,7 +26,8 @@ import {
   Package,
   Heart,
   Info,
-  Timer
+  Timer,
+  X
 
 } from 'lucide-angular';
 
@@ -162,6 +163,8 @@ readonly Heart = Heart;
 readonly Info = Info;
 
 readonly Timer = Timer;
+
+readonly X = X;
 
 showEarlyBirdMenu = false;
 
@@ -434,6 +437,11 @@ private pbbTimerId?: ReturnType<typeof setInterval>;
 
     this.showEarlyBirdInfo =
       !this.showEarlyBirdInfo;
+  }
+
+  closeEarlyBirdInfo(): void {
+
+    this.showEarlyBirdInfo = false;
   }
 
   private updatePbbCountdown(): void {
