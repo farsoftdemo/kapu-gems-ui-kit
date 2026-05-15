@@ -244,6 +244,16 @@
           {{ diamond.badge }}
         </span>
 
+        <button
+          class="quick-view-button"
+          type="button"
+          aria-label="Quick view diamond"
+          (click)="openQuickView(diamond)"
+        >
+          <lucide-icon [img]="Eye">
+          </lucide-icon>
+        </button>
+
         <div class="diamond-image">
           <img
             [src]="diamond.image"
@@ -290,6 +300,93 @@
     </section>
 
   </main>
+
+  <div
+    class="advanced-backdrop"
+    *ngIf="quickViewDiamond"
+    (click)="closeQuickView()"
+  >
+    <section
+      class="quick-view-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quickViewTitle"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="quick-close"
+        type="button"
+        aria-label="Close quick view"
+        (click)="closeQuickView()"
+      >
+        <lucide-icon [img]="X">
+        </lucide-icon>
+      </button>
+
+      <div class="quick-image">
+        <img
+          [src]="quickViewDiamond.image"
+          [alt]="quickViewDiamond.shape"
+        >
+      </div>
+
+      <div class="quick-details">
+        <small>
+          QUICK VIEW
+        </small>
+
+        <h2 id="quickViewTitle">
+          {{ quickViewDiamond.shape }}
+        </h2>
+
+        <p>
+          {{ quickViewDiamond.meta }}
+        </p>
+
+        <strong>
+          {{ quickViewDiamond.price }}
+        </strong>
+
+        <div class="quick-spec-grid">
+          <div>
+            <span>Certificate</span>
+            <b>{{ quickViewDiamond.certificate || 'GIA verified' }}</b>
+          </div>
+
+          <div>
+            <span>Measurements</span>
+            <b>{{ quickViewDiamond.measurements || 'Available on request' }}</b>
+          </div>
+
+          <div>
+            <span>Location</span>
+            <b>{{ quickViewDiamond.location || 'India' }}</b>
+          </div>
+
+          <div>
+            <span>Luster</span>
+            <b>{{ quickViewDiamond.luster || 'EX' }}</b>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button
+            class="quiet-action"
+            type="button"
+          >
+            Add to Compare
+          </button>
+
+          <button
+            class="primary-action"
+            type="button"
+          >
+            Request Stone
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <div
     class="advanced-backdrop"

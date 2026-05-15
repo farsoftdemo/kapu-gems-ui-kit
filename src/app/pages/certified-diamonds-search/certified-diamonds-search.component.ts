@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import {
   BadgeCheck,
   ChevronDown,
+  Eye,
   Grid2X2,
   Heart,
   LucideAngularModule,
@@ -71,6 +72,10 @@ type DiamondResult = {
   shape: string;
   meta: string;
   price: string;
+  certificate?: string;
+  measurements?: string;
+  location?: string;
+  luster?: string;
 };
 
 @Component({
@@ -87,6 +92,7 @@ type DiamondResult = {
 export class CertifiedDiamondsSearchComponent {
   readonly BadgeCheck = BadgeCheck;
   readonly ChevronDown = ChevronDown;
+  readonly Eye = Eye;
   readonly Grid2X2 = Grid2X2;
   readonly Heart = Heart;
   readonly RotateCcw = RotateCcw;
@@ -98,6 +104,7 @@ export class CertifiedDiamondsSearchComponent {
 
   advancedOpen = true;
   advancedModalOpen = false;
+  quickViewDiamond?: DiamondResult;
   status = 'All';
   unseenOnly = false;
   demandView = 'Search Demand';
@@ -320,5 +327,13 @@ export class CertifiedDiamondsSearchComponent {
 
   closeAdvancedFilters(): void {
     this.advancedModalOpen = false;
+  }
+
+  openQuickView(diamond: DiamondResult): void {
+    this.quickViewDiamond = diamond;
+  }
+
+  closeQuickView(): void {
+    this.quickViewDiamond = undefined;
   }
 }
