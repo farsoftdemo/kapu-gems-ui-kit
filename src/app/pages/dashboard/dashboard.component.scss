@@ -1044,6 +1044,100 @@ h2 {
   position: relative;
 }
 
+.tile-info-btn {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid #eadfd2;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #f6ecdf
+    );
+
+  color: #b89257;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 4;
+
+  transition: all 0.22s ease;
+
+  lucide-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+
+    border-color: #cfb289;
+
+    box-shadow:
+      0 10px 20px rgba(184,146,87,0.16);
+  }
+}
+
+.earlybird-info-popover {
+  position: absolute;
+
+  top: 48px;
+  right: 14px;
+
+  width: 245px;
+
+  border: 1px solid #eadfd2;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #f8f1e8
+    );
+
+  padding: 14px;
+
+  z-index: 110;
+
+  box-shadow:
+    0 20px 42px rgba(43,38,34,0.14);
+
+  strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #2b2622;
+
+    font-size: 13px;
+  }
+
+  p {
+    margin: 0;
+
+    color: #74695d;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+  }
+}
+
 /* DROPDOWN */
 
 .earlybird-dropdown {
@@ -1125,6 +1219,61 @@ h2 {
   small {
     color: #b7a998;
   }
+}
+
+.pbb-card {
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf9,
+      #f5ebdc
+    );
+
+  .stat-icon {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(184,146,87,0.18),
+        rgba(184,146,87,0.08)
+      );
+  }
+}
+
+.pbb-countdown {
+  width: fit-content;
+
+  min-width: 104px;
+
+  margin-top: 6px;
+
+  border: 1px solid #e2cfb1;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffaf0,
+      #ead6b4
+    );
+
+  color: #2b2622;
+
+  padding:
+    6px
+    10px;
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  line-height: 1;
 }
 
 .stat-card-action {

@@ -24,7 +24,9 @@ import {
   HandCoins,
   Sparkles,
   Package,
-  Heart
+  Heart,
+  Info,
+  Timer
 
 } from 'lucide-angular';
 
@@ -157,7 +159,23 @@ readonly Package = Package;
 
 readonly Heart = Heart;
 
+readonly Info = Info;
+
+readonly Timer = Timer;
+
 showEarlyBirdMenu = false;
+
+showEarlyBirdInfo = false;
+
+readonly pbbDurationMs =
+  72 * 60 * 60 * 1000;
+
+pbbCountdown = '72:00:00';
+
+private pbbEndsAt =
+  Date.now() + this.pbbDurationMs;
+
+private pbbTimerId?: ReturnType<typeof setInterval>;
 
   activeNoticeIndex = 0;
 
@@ -331,6 +349,13 @@ showEarlyBirdMenu = false;
 
   ngOnInit(): void {
 
+    this.updatePbbCountdown();
+
+    this.pbbTimerId =
+      setInterval(() => {
+        this.updatePbbCountdown();
+      }, 1000);
+
     this.noticeRotationId =
       setInterval(() => {
         this.nextNotice();
@@ -341,6 +366,10 @@ showEarlyBirdMenu = false;
 
     if (this.noticeRotationId) {
       clearInterval(this.noticeRotationId);
+    }
+
+    if (this.pbbTimerId) {
+      clearInterval(this.pbbTimerId);
     }
   }
 
@@ -396,6 +425,52 @@ showEarlyBirdMenu = false;
   this.showEarlyBirdMenu =
     !this.showEarlyBirdMenu;
 }
+
+  toggleEarlyBirdInfo(
+    event: Event
+  ): void {
+
+    event.stopPropagation();
+
+    this.showEarlyBirdInfo =
+      !this.showEarlyBirdInfo;
+  }
+
+  private updatePbbCountdown(): void {
+
+    const remainingMs =
+      Math.max(
+        this.pbbEndsAt - Date.now(),
+        0
+      );
+
+    const totalSeconds =
+      Math.ceil(remainingMs / 1000);
+
+    const hours =
+      Math.floor(totalSeconds / 3600);
+
+    const minutes =
+      Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+      totalSeconds % 60;
+
+    this.pbbCountdown =
+      [
+        hours,
+        minutes,
+        seconds
+      ]
+        .map(value =>
+          String(value).padStart(2, '0')
+        )
+        .join(':');
+
+    if (remainingMs === 0 && this.pbbTimerId) {
+      clearInterval(this.pbbTimerId);
+    }
+  }
 
   nextNotice(): void {
 

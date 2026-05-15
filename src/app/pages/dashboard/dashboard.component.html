@@ -56,6 +56,16 @@
     class="stat-card earlybird-card"
   >
 
+    <button
+      class="tile-info-btn"
+      type="button"
+      aria-label="Early Bird information"
+      (click)="toggleEarlyBirdInfo($event)"
+    >
+      <lucide-icon [img]="Info">
+      </lucide-icon>
+    </button>
+
     <div class="stat-icon">
 
       <lucide-icon [img]="Gavel">
@@ -221,19 +231,33 @@
 
   </div>
 
-  <!-- DUMMY -->
+  <!-- PBB -->
 
-  <div class="stat-card muted-card">
+  <div class="stat-card pbb-card">
 
-    <div class="stat-content muted">
+    <div class="stat-icon">
+
+      <lucide-icon [img]="Timer">
+      </lucide-icon>
+
+    </div>
+
+    <div class="stat-content">
 
       <small>
-        COMING SOON
+        72 HOUR WINDOW
       </small>
 
       <h2>
-        Market Insights
+        PBB
       </h2>
+
+      <div
+        class="pbb-countdown"
+        aria-live="polite"
+      >
+        {{ pbbCountdown }}
+      </div>
 
     </div>
 
@@ -296,6 +320,21 @@
         <lucide-icon [img]="ChevronRight">
         </lucide-icon>
       </button>
+
+    </div>
+
+    <div
+      class="earlybird-info-popover"
+      *ngIf="showEarlyBirdInfo"
+    >
+
+      <strong>
+        Early Bird
+      </strong>
+
+      <p>
+        Priority bidding access for selected stones before the wider inventory opens.
+      </p>
 
     </div>
 
