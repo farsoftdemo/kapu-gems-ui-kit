@@ -35,6 +35,12 @@
   top: 18px;
 }
 
+.mobile-filter-backdrop,
+.mobile-filter-trigger,
+.mobile-filter-close {
+  display: none;
+}
+
 .refine-head {
   display: flex;
   align-items: flex-start;
@@ -57,7 +63,7 @@
     line-height: 1.2;
   }
 
-  button {
+  .reset-filter-btn {
     border: 0;
     background: transparent;
     color: #b89257;
@@ -319,6 +325,32 @@ select {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.mobile-filter-trigger {
+  height: 38px;
+  border: 1px solid #d9c6aa;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      135deg,
+      #fffaf0,
+      #ead6b4
+    );
+  color: #2b2622;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 13px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+
+  lucide-icon {
+    width: 15px;
+    height: 15px;
+    color: #9a7b4d;
+  }
 }
 
 .status-pills {
@@ -970,6 +1002,68 @@ select {
 }
 
 @media(max-width: 860px) {
+  .certified-market-page {
+    display: block;
+  }
+
+  .mobile-filter-trigger {
+    display: inline-flex;
+  }
+
+  .mobile-filter-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 3490;
+    border: 0;
+    background: rgba(24,22,20,0.54);
+    backdrop-filter: blur(5px);
+  }
+
+  .mobile-filter-close {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e1d4c7;
+    border-radius: 50%;
+    background: white;
+    color: #74695d;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    lucide-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .refine-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    z-index: 3500;
+    width: min(88vw, 370px);
+    max-height: none;
+    height: 100vh;
+    border-radius:
+      20px
+      0
+      0
+      20px;
+    transform: translateX(106%);
+    transition: transform 0.28s ease;
+    box-shadow:
+      -24px 0 60px rgba(24,22,20,0.24);
+  }
+
+  .refine-panel.mobile-open {
+    transform: translateX(0);
+  }
+
   .result-toolbar,
   .toolbar-actions,
   .stock-action-bar {
@@ -983,6 +1077,7 @@ select {
   }
 
   .stock-actions,
+  .mobile-filter-trigger,
   .stock-actions button,
   .demand-control,
   .demand-control select {

@@ -104,6 +104,7 @@ export class CertifiedDiamondsSearchComponent {
 
   advancedOpen = true;
   advancedModalOpen = false;
+  mobileFilterOpen = false;
   quickViewDiamond?: DiamondResult;
   status = 'All';
   unseenOnly = false;
@@ -335,5 +336,13 @@ export class CertifiedDiamondsSearchComponent {
 
   closeQuickView(): void {
     this.quickViewDiamond = undefined;
+  }
+
+  openMobileFilters(): void {
+    this.mobileFilterOpen = true;
+  }
+
+  closeMobileFilters(): void {
+    this.mobileFilterOpen = false;
   }
 }
