@@ -42,6 +42,14 @@ export const routes: Routes = [
       },
 
       {
+        path: 'stock-search/certified',
+
+        loadComponent: () =>
+          import('./pages/certified-diamonds-search/certified-diamonds-search.component')
+          .then(m => m.CertifiedDiamondsSearchComponent)
+      },
+
+      {
         path: 'stock-search/fancy',
 
         loadComponent: () =>

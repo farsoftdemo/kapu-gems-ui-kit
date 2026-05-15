@@ -1,0 +1,549 @@
+<section class="certified-search-page">
+
+  <div class="search-atelier">
+
+    <aside class="atelier-rail">
+
+      <div class="rail-mark">
+        <lucide-icon [img]="Gem">
+        </lucide-icon>
+      </div>
+
+      <small>
+        CERTIFIED COLLECTION
+      </small>
+
+      <h1>
+        Diamond Atelier
+      </h1>
+
+      <p>
+        A private-grade search desk for certified stones, shaped around lab, make, price and precision details.
+      </p>
+
+      <div class="rail-metrics">
+        <div>
+          <strong>
+            14
+          </strong>
+
+          <span>
+            Shapes
+          </span>
+        </div>
+
+        <div>
+          <strong>
+            4
+          </strong>
+
+          <span>
+            Labs
+          </span>
+        </div>
+
+        <div>
+          <strong>
+            72h
+          </strong>
+
+          <span>
+            Demand hold
+          </span>
+        </div>
+      </div>
+
+    </aside>
+
+    <main class="atelier-workspace">
+
+      <header class="workspace-header">
+
+        <div>
+          <small>
+            PREMIUM STOCK SEARCH
+          </small>
+
+          <h2>
+            Certified Diamonds
+          </h2>
+        </div>
+
+        <div class="workspace-actions">
+          <button
+            class="ghost-action"
+            type="button"
+            (click)="resetSearch()"
+          >
+            <lucide-icon [img]="RotateCcw">
+            </lucide-icon>
+
+            Reset
+          </button>
+
+          <button
+            class="solid-action"
+            type="button"
+          >
+            <lucide-icon [img]="Search">
+            </lucide-icon>
+
+            Search
+          </button>
+
+          <button
+            class="save-action"
+            type="button"
+          >
+            <lucide-icon [img]="Save">
+            </lucide-icon>
+
+            Save Demand
+          </button>
+        </div>
+
+      </header>
+
+      <section class="preference-strip">
+
+        <div class="segmented-control">
+          <span>
+            Status
+          </span>
+
+          <button
+            type="button"
+            [class.active]="status === 'All'"
+            (click)="status = 'All'"
+          >
+            All
+          </button>
+
+          <button
+            type="button"
+            [class.active]="status === 'New Arrival'"
+            (click)="status = 'New Arrival'"
+          >
+            New Arrival
+          </button>
+        </div>
+
+        <label class="unseen-toggle">
+          <input
+            type="checkbox"
+            [(ngModel)]="unseenOnly"
+          >
+
+          <span>
+            Unseen only
+          </span>
+        </label>
+
+        <select
+          class="demand-select"
+          [(ngModel)]="demandView"
+        >
+          <option value="Search Demand">Search Demand</option>
+          <option value="My Demand">My Demand</option>
+          <option value="Shared Demand">Shared Demand</option>
+        </select>
+
+      </section>
+
+      <section class="filter-panel hero-panel">
+
+        <div class="panel-title">
+          <span>
+            01
+          </span>
+
+          <div>
+            <small>
+              FOUNDATION
+            </small>
+
+            <h3>
+              Lab, shape and commercial range
+            </h3>
+          </div>
+        </div>
+
+        <div class="lab-row">
+          <button
+            *ngFor="let lab of labs"
+            class="lab-chip"
+            type="button"
+            [class.selected]="isSelected('lab', lab)"
+            (click)="toggleSelection('lab', lab)"
+          >
+            <lucide-icon [img]="BadgeCheck">
+            </lucide-icon>
+
+            {{ lab }}
+          </button>
+        </div>
+
+        <div class="shape-gallery">
+          <button
+            *ngFor="let shape of shapes"
+            class="shape-card"
+            type="button"
+            [class.selected]="isSelected('shape', shape.label)"
+            (click)="toggleSelection('shape', shape.label)"
+          >
+            <span
+              class="shape-jewel"
+              [ngClass]="shape.iconClass"
+            >
+              <span></span>
+            </span>
+
+            <span>
+              {{ shape.label }}
+            </span>
+          </button>
+        </div>
+
+        <div class="range-grid">
+          <label class="range-field">
+            <span>
+              Weight
+            </span>
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.weight.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.weight.to"
+            >
+          </label>
+
+          <label class="select-field">
+            <span>
+              Size
+            </span>
+
+            <select [(ngModel)]="size">
+              <option value="">Any size range</option>
+              <option value="0.30 - 0.49">0.30 - 0.49</option>
+              <option value="0.50 - 0.99">0.50 - 0.99</option>
+              <option value="1.00 - 1.49">1.00 - 1.49</option>
+              <option value="1.50 - 1.99">1.50 - 1.99</option>
+              <option value="2.00+">2.00+</option>
+            </select>
+          </label>
+
+          <label class="range-field">
+            <span>
+              PR/CT
+            </span>
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.price.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.price.to"
+            >
+          </label>
+
+          <label class="range-field">
+            <span>
+              Dis%
+            </span>
+
+            <input
+              type="text"
+              placeholder="From"
+              [(ngModel)]="ranges.discount.from"
+            >
+
+            <input
+              type="text"
+              placeholder="To"
+              [(ngModel)]="ranges.discount.to"
+            >
+          </label>
+        </div>
+
+      </section>
+
+      <section class="filter-panel">
+
+        <div class="panel-title">
+          <span>
+            02
+          </span>
+
+          <div>
+            <small>
+              MAKE
+            </small>
+
+            <h3>
+              Color, clarity and finish
+            </h3>
+          </div>
+        </div>
+
+        <div class="option-block">
+          <label>
+            Color
+          </label>
+
+          <div class="token-grid">
+            <button
+              *ngFor="let option of colorOptions"
+              class="lux-token"
+              type="button"
+              [class.selected]="isSelected('color', option)"
+              (click)="toggleSelection('color', option)"
+            >
+              {{ option }}
+            </button>
+          </div>
+        </div>
+
+        <div class="option-block">
+          <label>
+            Clarity
+          </label>
+
+          <div class="token-grid">
+            <button
+              *ngFor="let option of clarityOptions"
+              class="lux-token"
+              type="button"
+              [class.selected]="isSelected('clarity', option)"
+              (click)="toggleSelection('clarity', option)"
+            >
+              {{ option }}
+            </button>
+          </div>
+        </div>
+
+        <div class="quality-grid">
+          <div
+            class="option-block mini"
+            *ngFor="let group of qualityGroups"
+          >
+            <label>
+              {{ group.label }}
+            </label>
+
+            <div class="token-grid compact">
+              <button
+                *ngFor="let option of group.options"
+                class="lux-token"
+                type="button"
+                [class.selected]="isSelected(group.key, option)"
+                (click)="toggleSelection(group.key, option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="quality-grid two">
+          <div class="option-block mini">
+            <label>
+              Fluor
+            </label>
+
+            <div class="token-grid compact">
+              <button
+                *ngFor="let option of fluorOptions"
+                class="lux-token"
+                type="button"
+                [class.selected]="isSelected('fluor', option)"
+                (click)="toggleSelection('fluor', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+
+          <div class="option-block mini">
+            <label>
+              Shade
+            </label>
+
+            <div class="token-grid compact">
+              <button
+                *ngFor="let option of shadeOptions"
+                class="lux-token"
+                type="button"
+                [class.selected]="isSelected('shade', option)"
+                (click)="toggleSelection('shade', option)"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="advanced-suite">
+
+        <button
+          class="advanced-head"
+          type="button"
+          [class.open]="advancedOpen"
+          (click)="advancedOpen = !advancedOpen"
+        >
+          <span>
+            <lucide-icon [img]="SlidersHorizontal">
+            </lucide-icon>
+
+            Advanced certificate controls
+          </span>
+
+          <lucide-icon [img]="ChevronDown">
+          </lucide-icon>
+        </button>
+
+        <div
+          class="advanced-grid"
+          *ngIf="advancedOpen"
+        >
+
+          <article class="filter-panel compact-panel">
+            <div class="panel-title small">
+              <span>
+                A
+              </span>
+
+              <div>
+                <small>ADDITIONAL</small>
+                <h3>Origin and programs</h3>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>CANADAMARK</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of canadamarkOptions" class="lux-token" type="button" [class.selected]="isSelected('canadamark', option)" (click)="toggleSelection('canadamark', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>LOC</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of locationOptions" class="lux-token" type="button" [class.selected]="isSelected('location', option)" (click)="toggleSelection('location', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>H &amp; A</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of haOptions" class="lux-token" type="button" [class.selected]="isSelected('ha', option)" (click)="toggleSelection('ha', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>Luster</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of lusterOptions" class="lux-token" type="button" [class.selected]="isSelected('luster', option)" (click)="toggleSelection('luster', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>TYPE IIA</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of typeIiaOptions" class="lux-token" type="button" [class.selected]="isSelected('typeIia', option)" (click)="toggleSelection('typeIia', option)">{{ option }}</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="filter-panel compact-panel">
+            <div class="panel-title small">
+              <span>
+                B
+              </span>
+
+              <div>
+                <small>INCLUSIONS</small>
+                <h3>Black, white and clean eye</h3>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>Black</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of blackOptions" class="lux-token" type="button" [class.selected]="isSelected('black', option)" (click)="toggleSelection('black', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>White</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of whiteOptions" class="lux-token" type="button" [class.selected]="isSelected('white', option)" (click)="toggleSelection('white', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>Milky</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of milkyOptions" class="lux-token" type="button" [class.selected]="isSelected('milky', option)" (click)="toggleSelection('milky', option)">{{ option }}</button>
+              </div>
+            </div>
+
+            <div class="option-block mini">
+              <label>Eye Clean</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of eyeCleanOptions" class="lux-token" type="button" [class.selected]="isSelected('eyeClean', option)" (click)="toggleSelection('eyeClean', option)">{{ option }}</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="filter-panel compact-panel measure-panel">
+            <div class="panel-title small">
+              <span>
+                C
+              </span>
+
+              <div>
+                <small>MEASUREMENTS</small>
+                <h3>Depth, table and proportions</h3>
+              </div>
+            </div>
+
+            <div class="measure-grid">
+              <label
+                class="range-field"
+                *ngFor="let item of measurementFields"
+              >
+                <span>{{ item.label }}</span>
+                <input type="text" placeholder="From" [(ngModel)]="ranges[item.key].from">
+                <input type="text" placeholder="To" [(ngModel)]="ranges[item.key].to">
+              </label>
+            </div>
+
+            <div class="option-block mini">
+              <label>Culet</label>
+              <div class="token-grid compact">
+                <button *ngFor="let option of culetOptions" class="lux-token" type="button" [class.selected]="isSelected('culet', option)" (click)="toggleSelection('culet', option)">{{ option }}</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</section>
